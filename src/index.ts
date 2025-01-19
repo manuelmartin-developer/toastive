@@ -1,3 +1,6 @@
-export type { ToastiveProps, ToastiveVariant, ToastivePosition } from './toast.types'
+// Types
+export type { ToastiveProps } from './toast.types'
+export { ToastivePosition, ToastiveProp, ToastiveVariant } from './toast.types'
 
-export * as useToastive from './useToastive'
+// Components and hooks
+export { useToastive } from './useToastive'
