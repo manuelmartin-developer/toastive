@@ -1,11 +1,11 @@
-import { ToastivePosition, ToastiveProp, ToastiveProps, ToastiveVariant } from '../toast.types'
+import { ToastivePosition, ToastiveProp, ToastiveProps, ToastiveVariant } from './toast.types'
 import toastiveCSS from './toastive.css?raw'
-import closeIcon from '../assets/close.svg?raw'
-import successIcon from '../assets/success.svg?raw'
-import warningIcon from '../assets/warning.svg?raw'
-import infoIcon from '../assets/info.svg?raw'
-import errorIcon from '../assets/error.svg?raw'
-import loadingIcon from '../assets/loading.svg?raw'
+import closeIcon from './assets/close.svg?raw'
+import successIcon from './assets/success.svg?raw'
+import warningIcon from './assets/warning.svg?raw'
+import infoIcon from './assets/info.svg?raw'
+import errorIcon from './assets/error.svg?raw'
+import loadingIcon from './assets/loading.svg?raw'
 
 export default class MmToastive extends HTMLElement {
 	// ------ PRIVATE PROPERTIES ------

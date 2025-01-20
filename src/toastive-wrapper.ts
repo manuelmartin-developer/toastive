@@ -1,5 +1,5 @@
-import MmToastive from '../toastive/toastive'
-import toastiveWrapperCSS from './css/toastive-wrapper.css?raw'
+import toastiveWrapperCSS from './toastive-wrapper.css?raw'
+import MmToastive from './toastive.ts'
 
 export class MmToastiveWrapper extends HTMLElement {
 	//  ------ GETTERS & SETTERS ------

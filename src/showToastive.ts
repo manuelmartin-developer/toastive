@@ -1,8 +1,8 @@
-import MmToastive from './toastive/toastive'
+import MmToastive from './toastive'
 import { ToastivePosition, ToastiveProps } from './toast.types'
-import { MmToastiveWrapper } from './toastive-wrapper/toastive-wrapper'
+import { MmToastiveWrapper } from './toastive-wrapper'
 
-export const useToastive = (props?: ToastiveProps): MmToastive => {
+export const showToastive = (props?: ToastiveProps): MmToastive => {
 	let toastiveWrapper = document.querySelector(
 		`mm-toastive-wrapper.${props?.position ?? ToastivePosition.BottomRight}`
 	) as MmToastiveWrapper
