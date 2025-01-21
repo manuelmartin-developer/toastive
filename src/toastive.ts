@@ -1,4 +1,4 @@
-import { ToastivePosition, ToastiveProp, ToastiveProps, ToastiveVariant } from './toast.types'
+import { ToastivePosition, ToastiveProp, ToastiveProps, ToastiveVariant } from './toastive.types'
 import toastiveCSS from './toastive.css?raw'
 import closeIcon from './assets/close.svg?raw'
 import successIcon from './assets/success.svg?raw'
@@ -50,8 +50,8 @@ export default class MmToastive extends HTMLElement {
       </style>
       <div class="toastive ${variant} ${position}">
         ${this.#getSvgIcon(variant) ? `<slot name="icon">${this.#getSvgIcon(variant)}</slot>` : ''}
-        <slot name="title">${title}</slot>
-        <slot name="message">${message}</slot>
+        <slot ${!title ? 'hidden' : ''} name="title">${title}</slot>
+        <slot ${!message ? 'hidden' : ''} name="message">${message}</slot>
         ${closeButton ? `<button id="toastive__close" class="toastive__close">${closeIcon}</button>` : ''}
         ${autoClose ? '<div class="toastive__progress"></div>' : ''}
       </div>
@@ -82,7 +82,7 @@ export default class MmToastive extends HTMLElement {
 			title = '',
 			message = '',
 			position = ToastivePosition.BottomRight,
-			variant = ToastiveVariant.Light
+			variant = ToastiveVariant.Default
 		} = props || {}
 
 		this.options = {
@@ -203,16 +203,16 @@ export default class MmToastive extends HTMLElement {
 	}
 
 	#slideToClose = (): void => {
-		this.addEventListener('mousedown', event => {
+		const handleMove = (event: MouseEvent | TouchEvent) => {
 			const isAtRightPosition =
 				this.position === ToastivePosition.TopRight || this.position === ToastivePosition.BottomRight
 
-			const { clientX } = event
+			const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
 
 			const initialX = clientX
 
-			const handleMouseMove = (event: MouseEvent) => {
-				const currentX = event.clientX
+			const handleMouseMove = (event: MouseEvent | TouchEvent) => {
+				const currentX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
 
 				const diffX = currentX - initialX
 
@@ -222,11 +222,13 @@ export default class MmToastive extends HTMLElement {
 				}
 			}
 
-			const handleMouseUp = (event: MouseEvent) => {
+			const handleMouseUp = (event: MouseEvent | TouchEvent) => {
 				document.removeEventListener('mousemove', handleMouseMove)
 				document.removeEventListener('mouseup', handleMouseUp)
+				document.removeEventListener('touchmove', handleMouseMove)
+				document.removeEventListener('touchend', handleMouseUp)
 
-				const currentX = event.clientX
+				const currentX = event instanceof MouseEvent ? event.clientX : event.changedTouches[0].clientX
 				const diffX = currentX - initialX
 
 				if ((isAtRightPosition && diffX > 50) || (!isAtRightPosition && diffX < -50)) {
@@ -249,14 +251,38 @@ export default class MmToastive extends HTMLElement {
 
 			document.addEventListener('mousemove', handleMouseMove)
 			document.addEventListener('mouseup', handleMouseUp)
-		})
+			document.addEventListener('touchmove', handleMouseMove)
+			document.addEventListener('touchend', handleMouseUp)
+		}
+
+		this.addEventListener('mousedown', handleMove)
+		this.addEventListener('touchstart', handleMove)
 	}
 
 	// ------ PUBLIC METHODS ------
+	/**
+	 * Close the toast
+	 * @returns {void}
+	 * @example
+	 * toast.close()
+	 */
 	close(): void {
 		this.#addCloseAnimation()
 	}
 
+	/**
+	 * Update the toast
+	 * @param {ToastiveProps} props - Toastive properties
+	 * @returns {void}
+	 * @example
+	 * toast.update({
+	 *  title: 'New Title',
+	 * message: 'New Message',
+	 * variant: ToastiveVariant.Error,
+	 * autoClose: false,
+	 * closeButton: true
+	 * })
+	 */
 	update(props?: ToastiveProps): void {
 		const { autoClose, closeButton, duration, title, message, variant } = props || {}
 
@@ -275,14 +301,7 @@ export default class MmToastive extends HTMLElement {
 		if (message && this.message !== message) {
 			const messageSlot = this.shadowRoot?.querySelector("slot[name='message']")
 
-			if (messageSlot) {
-				messageSlot.innerHTML = message
-			} else {
-				this.shadowRoot
-					?.querySelector('.toastive')
-					?.appendChild(document.createElement('slot'))
-					.setAttribute('name', 'message')
-			}
+			messageSlot!.innerHTML = message
 
 			this.message = message
 		}
@@ -290,14 +309,7 @@ export default class MmToastive extends HTMLElement {
 		if (title && this.title !== title) {
 			const titleSlot = this.shadowRoot?.querySelector("slot[name='title']")
 
-			if (titleSlot) {
-				titleSlot.innerHTML = title
-			} else {
-				this.shadowRoot
-					?.querySelector('.toastive')
-					?.appendChild(document.createElement('slot'))
-					.setAttribute('name', 'title')
-			}
+			titleSlot!.innerHTML = title
 
 			this.title = title
 		}
