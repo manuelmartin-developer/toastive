@@ -28,7 +28,7 @@ export enum ToastiveProp {
  *
  * @property {string} Error - Error variant
  * @property {string} Info - Info variant
- * @property {string} Light - Light variant
+ * @property {string} Default - Default variant
  * @property {string} Loading - Loading variant
  * @property {string} Success - Success variant
  * @property {string} Warning - Warning variant
@@ -36,7 +36,7 @@ export enum ToastiveProp {
 export enum ToastiveVariant {
 	Error = 'error',
 	Info = 'info',
-	Light = 'light',
+	Default = 'default',
 	Loading = 'loading',
 	Success = 'success',
 	Warning = 'warning'
