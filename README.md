@@ -1,3 +1,17 @@
+![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label) [![npm](https://img.shields.io/npm/v/toastive.svg)](https://www.npmjs.com/package/toastive) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/toastive?style=flat-square)](https://bundlephobia.com/package/toastive@latest) [![install size](https://packagephobia.com/badge?p=toastive)](https://packagephobia.com/result?p=toastive) [![npm downloads](https://img.shields.io/npm/dt/toastive.svg?style=flat-square)](https://npm-stat.com/charts.html?package=toastive)
+
+<!-- Logo -->
+<p align="center">
+<img src="/public/assets/logo.png" alt="Toastive logo" />
+</p>
+
+# Toastive
+
+<p align="center">
+<a href="https://toastive.manuelmartin.dev" target="_blank">
+<img src="https://img.shields.io/badge/storybook-demo-FF4785?style=for-the-badge&logo=storybook" alt="Storybook" />
+</a>
+
 ## 👀 Overview
 
 Toastive is a lightweight, highly customizable, and easy-to-use native web component library for creating toast notifications.
