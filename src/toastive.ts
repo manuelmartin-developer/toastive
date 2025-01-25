@@ -256,7 +256,7 @@ export default class MmToastive extends HTMLElement {
 		}
 
 		this.addEventListener('mousedown', handleMove)
-		this.addEventListener('touchstart', handleMove)
+		this.addEventListener('touchstart', handleMove, { passive: true })
 	}
 
 	// ------ PUBLIC METHODS ------
@@ -283,7 +283,7 @@ export default class MmToastive extends HTMLElement {
 	 * closeButton: true
 	 * })
 	 */
-	update(props?: ToastiveProps): void {
+	update(props?: Omit<ToastiveProps, ToastiveProp.Position>): void {
 		const { autoClose, closeButton, duration, title, message, variant } = props || {}
 
 		if (duration && this.duration !== duration) {
