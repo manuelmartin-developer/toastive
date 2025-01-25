@@ -15,6 +15,7 @@
 
 	/* Host styles */
 	display: block;
+	height: fit-content;
 	pointer-events: auto;
 	position: relative;
 	width: var(--width);

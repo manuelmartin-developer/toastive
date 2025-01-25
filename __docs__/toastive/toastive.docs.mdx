@@ -1,4 +1,4 @@
-import { Markdown, Meta, Story } from '@storybook/blocks'
+import { ColorItem, ColorPalette, Markdown, Meta, Story } from '@storybook/blocks'
 import * as ToastiveStories from './toastive.stories'
 
 <Meta of={ToastiveStories} />
@@ -131,7 +131,7 @@ toast.close()
 <br />
 ### Updating a toastive
 
-You can update a toastive by calling the `update()` method. This method accepst same properties as `showToastive()` method.
+You can update a toastive by calling the `update()` method. This method accepst same properties as `showToastive()` method, except the `position` property.
 
 ```javascript
 const toast = showToastive({
@@ -139,15 +139,14 @@ const toast = showToastive({
 	message: '👋 Hi from top-right corner!',
 	position: ToastivePosition.TopRight,
 	variant: ToastiveVariant.Loading,
-	autoClose: false,
-	closeButton: true
+	autoClose: false
 })
 
 // Do something...
 toast.update({
 	title: 'Updated title',
 	message: 'Updated message',
-	variant: ToastiveVariant.Warning,
+	variant: ToastiveVariant.Success,
 	autoClose: true
 })
 ```
@@ -155,9 +154,61 @@ toast.update({
 <Story of={ToastiveStories.updatedPropsExample} />
 
 <br />
+## 🎨 Color pallete
+
+<ColorPalette>
+	<ColorItem
+		name="Default & Loading"
+		subtitle="Default color pallete"
+		colors={{
+			Background: '#fff',
+			Border: '#ededed',
+			Content: '#333'
+		}}
+	/>
+	<ColorItem
+		name="Info"
+		subtitle="Info color pallete"
+		colors={{
+			Background: '#f0f8ff',
+			Border: '#b0e2ff',
+			Content: '#0973dc'
+		}}
+	/>
+	<ColorItem
+		name="Error"
+		subtitle="Error color pallete"
+		colors={{
+			Background: '#fff0f0',
+			Border: '#ffe0e1',
+			Content: '#e60000'
+		}}
+	/>
+	<ColorItem
+		name="Warning"
+		subtitle="Warning color pallete"
+		colors={{
+			Background: '#fffcf0',
+			Border: '#fdf5d3',
+			Content: '#dc7609'
+		}}
+	/>
+	<ColorItem
+		name="Success"
+		subtitle="Success color pallete"
+		colors={{
+			Background: '#ecfdf3',
+			Border: '#d3fde5',
+			Content: '#008a2e'
+		}}
+	/>
+</ColorPalette>
+
+<br />
 ## 💅 Styling
 
-Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS variables.
+Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS
+variables.
 
 ### Wrapper
 

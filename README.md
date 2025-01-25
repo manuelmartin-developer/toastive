@@ -43,6 +43,7 @@ yarn add toastive
 ```
 
 <br />
+
 ## 🚀 Usage
 
 Toastive element is, at the end of the day, a web component. So, you can use it like any other web component. However, we also provide a simple API to make it easier to use.
@@ -94,6 +95,7 @@ showToastive({
 Code above will show a toast notification with a success variant, a title, and a message. The toast will be displayed in the top-right corner of the screen and will automatically close after 5 seconds.
 
 <br />
+
 ### Closing a toastive
 
 Toasts are widely used in applications to show notifications to users. However, these notifications should not be blocking the user, so in terms of UX, it is advisable to use the default `autoClose` property.
@@ -130,6 +132,7 @@ toast.close()
 > **All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices.**
 
 <br />
+
 ### Updating a toastive
 
 You can update a toastive by calling the `update()` method. This method accepst same properties as `showToastive()` method.
@@ -154,6 +157,7 @@ toast.update({
 ```
 
 <br />
+
 ## 💅 Styling
 
 Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS variables.

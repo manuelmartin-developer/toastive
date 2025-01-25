@@ -411,9 +411,8 @@ export const updatedPropsExample: StoryObj<ToastiveProps> = () => {
 		setTimeout(() => {
 			toastive.update({
 				title: 'Updated Toastive',
-				message: '👋 Hi from top-left corner!',
-				position: ToastivePosition.TopLeft,
-				variant: ToastiveVariant.Warning,
+				message: '👋 Hi! This is an updated messade',
+				variant: ToastiveVariant.Success,
 				autoClose: true
 			})
 		}, 3000)
