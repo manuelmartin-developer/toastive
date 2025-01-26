@@ -36,5 +36,5 @@ export default class MmToastive extends HTMLElement {
      * closeButton: true
      * })
      */
-    update(props?: ToastiveProps): void;
+    update(props?: Omit<ToastiveProps, ToastiveProp.Position>): void;
 }
