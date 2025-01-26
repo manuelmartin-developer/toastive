@@ -1,19 +1,13 @@
-/* Global */
 * {
 	box-sizing: border-box;
 }
 
-/* Attributes */
-
 :host {
-	/* Host variables */
 	--color: var(--toastive-content-color, #333);
 	--font-size: var(--toastive-font-size, 0.8rem);
 	--width: var(--toastive-width, 350px);
 	--padding-vertical: var(--toastive-padding-vertical, 1rem);
 	--padding-horizontal: var(--toastive-padding-horizontal, 1rem);
-
-	/* Host styles */
 	display: block;
 	height: fit-content;
 	pointer-events: auto;
@@ -44,8 +38,6 @@ slot[name='icon'] {
 	top: 50%;
 	transform: translateY(-50%);
 }
-
-/* Classes */
 
 .toastive {
 	align-items: flex-start;
@@ -149,15 +141,11 @@ slot[name='icon'] {
 	width: 100%;
 }
 
-/* Media queries */
-
 @media (max-width: 576px) {
 	:host {
 		width: 100%;
 	}
 }
-
-/* Animations */
 
 @keyframes toastive-slide-top {
 	from {

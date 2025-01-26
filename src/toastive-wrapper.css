@@ -40,7 +40,6 @@ mm-toastive-wrapper.bottom-right {
 	right: var(--horizontal-offset);
 }
 
-/* Media queries */
 @media (max-width: 576px) {
 	mm-toastive-wrapper {
 		padding: 0 var(--horizontal-offset);

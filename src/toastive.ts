@@ -133,25 +133,7 @@ export default class MmToastive extends HTMLElement {
 		})
 
 		this.#timer = setTimeout(() => {
-			this.animate(
-				[
-					{ transform: 'translateY(0%)', opacity: 1 },
-					{
-						transform:
-							this.position === ToastivePosition.TopRight || this.position === ToastivePosition.TopLeft
-								? 'translateY(-100%)'
-								: 'translateY(100%)',
-						opacity: 0
-					}
-				],
-				{
-					duration: 300,
-					easing: 'ease-in-out',
-					fill: 'forwards'
-				}
-			).onfinish = () => {
-				this.#handleClose()
-			}
+			this.#addCloseAnimation()
 		}, this.duration)
 	}
 

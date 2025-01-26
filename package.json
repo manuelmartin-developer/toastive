@@ -1,6 +1,7 @@
 {
 	"name": "toastive",
-	"version": "1.0.2",
+	"sideEffects": false,
+	"version": "1.0.3",
 	"author": {
 		"name": "Manuel Martín",
 		"email": "hola@manuelmartin.dev",
