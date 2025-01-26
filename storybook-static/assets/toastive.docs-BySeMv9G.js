@@ -1,4 +1,4 @@
-import{j as e,M as a,a as o,S as n}from"./index-CEAF-3Br.js";import{useMDXComponents as r}from"./index-DE1YaLIP.js";import{T as l,p as c,c as h,u as d}from"./toastive.stories-Bt373lVL.js";import"./iframe-_AyWVr1r.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-7SSfYZ8z.js";import"./index-ogSvIofg.js";function i(s){const t={a:"a",blockquote:"blockquote",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...r(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(a,{of:l}),`
+import{j as e,M as l,a as o,S as r,C as c,b as n}from"./index-BYLNSqKm.js";import{useMDXComponents as a}from"./index-BBqR2sSl.js";import{T as h,p as d,c as p,u as f}from"./toastive.stories-B-Eb9SVY.js";import"./iframe-CwgiqJIQ.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-7SSfYZ8z.js";import"./index-ogSvIofg.js";function i(s){const t={a:"a",blockquote:"blockquote",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(l,{of:h}),`
 `,e.jsx(t.h2,{id:"-overview",children:"👀 Overview"}),`
 `,e.jsx(t.p,{children:"Toastive is a lightweight, highly customizable, and easy-to-use native web component library for creating toast notifications."}),`
 `,e.jsx(t.p,{children:"Some of the key features include:"}),`
@@ -56,7 +56,7 @@ showToastive({
 })
 `})}),`
 `,e.jsx(t.p,{children:"Code above will show a toast notification with a success variant, a title, and a message. The toast will be displayed in the top-right corner of the screen and will automatically close after 5 seconds."}),`
-`,e.jsx(n,{of:c}),`
+`,e.jsx(r,{of:d}),`
 `,e.jsx("br",{}),`
 `,e.jsx(t.h3,{id:"closing-a-toastive",children:"Closing a toastive"}),`
 `,e.jsxs(t.p,{children:["Toasts are widely used in applications to show notifications to users. However, these notifications should not be blocking the user, so in terms of UX, it is advisable to use the default ",e.jsx(t.code,{children:"autoClose"})," property."]}),`
@@ -70,7 +70,7 @@ showToastive({
 	closeButton: true
 })
 `})}),`
-`,e.jsx(n,{of:h}),`
+`,e.jsx(r,{of:p}),`
 `,e.jsxs(t.p,{children:["Additionally, you can close a toastive manually by calling the ",e.jsx(t.code,{children:"close()"})," method."]}),`
 `,e.jsx(t.pre,{children:e.jsx(t.code,{className:"language-javascript",children:`const toast = showToastive({
 	title: 'Toastive',
@@ -89,28 +89,31 @@ toast.close()
 `]}),`
 `,e.jsx("br",{}),`
 `,e.jsx(t.h3,{id:"updating-a-toastive",children:"Updating a toastive"}),`
-`,e.jsxs(t.p,{children:["You can update a toastive by calling the ",e.jsx(t.code,{children:"update()"})," method. This method accepst same properties as ",e.jsx(t.code,{children:"showToastive()"})," method."]}),`
+`,e.jsxs(t.p,{children:["You can update a toastive by calling the ",e.jsx(t.code,{children:"update()"})," method. This method accepst same properties as ",e.jsx(t.code,{children:"showToastive()"})," method, except the ",e.jsx(t.code,{children:"position"})," property."]}),`
 `,e.jsx(t.pre,{children:e.jsx(t.code,{className:"language-javascript",children:`const toast = showToastive({
 	title: 'Toastive',
 	message: '👋 Hi from top-right corner!',
 	position: ToastivePosition.TopRight,
 	variant: ToastiveVariant.Loading,
-	autoClose: false,
-	closeButton: true
+	autoClose: false
 })
 
 // Do something...
 toast.update({
 	title: 'Updated title',
 	message: 'Updated message',
-	variant: ToastiveVariant.Warning,
+	variant: ToastiveVariant.Success,
 	autoClose: true
 })
 `})}),`
-`,e.jsx(n,{of:d}),`
+`,e.jsx(r,{of:f}),`
+`,e.jsx("br",{}),`
+`,e.jsx(t.h2,{id:"-color-pallete",children:"🎨 Color pallete"}),`
+`,e.jsxs(c,{children:[e.jsx(n,{name:"Default & Loading",subtitle:"Default color pallete",colors:{Background:"#fff",Border:"#ededed",Content:"#333"}}),e.jsx(n,{name:"Info",subtitle:"Info color pallete",colors:{Background:"#f0f8ff",Border:"#b0e2ff",Content:"#0973dc"}}),e.jsx(n,{name:"Error",subtitle:"Error color pallete",colors:{Background:"#fff0f0",Border:"#ffe0e1",Content:"#e60000"}}),e.jsx(n,{name:"Warning",subtitle:"Warning color pallete",colors:{Background:"#fffcf0",Border:"#fdf5d3",Content:"#dc7609"}}),e.jsx(n,{name:"Success",subtitle:"Success color pallete",colors:{Background:"#ecfdf3",Border:"#d3fde5",Content:"#008a2e"}})]}),`
 `,e.jsx("br",{}),`
 `,e.jsx(t.h2,{id:"-styling",children:"💅 Styling"}),`
-`,e.jsx(t.p,{children:"Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS variables."}),`
+`,e.jsx(t.p,{children:`Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS
+variables.`}),`
 `,e.jsx(t.h3,{id:"wrapper",children:"Wrapper"}),`
 `,e.jsx(o,{children:`
 | Property   | Description | Default |
@@ -211,4 +214,4 @@ toast.update({
 `})}),`
 `,e.jsx(t.h2,{id:"playground",children:"Playground"}),`
 `,e.jsx(t.p,{children:"All these properties and styles can be easily tested in our playground."}),`
-`,e.jsx(t.p,{children:e.jsx(t.a,{href:"/story/documentation-toastive--playground",children:"Open the playground"})})]})}function j(s={}){const{wrapper:t}={...r(),...s.components};return t?e.jsx(t,{...s,children:e.jsx(i,{...s})}):i(s)}export{j as default};
+`,e.jsx(t.p,{children:e.jsx(t.a,{href:"/story/documentation-toastive--playground",children:"Open the playground"})})]})}function T(s={}){const{wrapper:t}={...a(),...s.components};return t?e.jsx(t,{...s,children:e.jsx(i,{...s})}):i(s)}export{T as default};
