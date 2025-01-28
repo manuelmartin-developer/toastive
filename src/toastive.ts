@@ -17,6 +17,8 @@ export default class MmToastive extends HTMLElement {
 
 	closeButton!: boolean
 
+	draggable!: boolean
+
 	duration!: number
 
 	icon!: boolean
@@ -78,6 +80,7 @@ export default class MmToastive extends HTMLElement {
 		const {
 			autoClose = true,
 			closeButton = false,
+			draggable = true,
 			duration = 5000,
 			title = '',
 			message = '',
@@ -88,6 +91,7 @@ export default class MmToastive extends HTMLElement {
 		this.options = {
 			autoClose,
 			closeButton,
+			draggable,
 			duration,
 			title,
 			message,
@@ -108,7 +112,9 @@ export default class MmToastive extends HTMLElement {
 				this.#addAutoCloseAnimation()
 			}
 
-			this.#slideToClose()
+			if (this.draggable) {
+				this.#slideToClose()
+			}
 		}
 	}
 
@@ -179,9 +185,9 @@ export default class MmToastive extends HTMLElement {
 	}
 
 	#handleClose = (): void => {
-		this.remove()
-
 		if (this.#timer) clearTimeout(this.#timer)
+
+		this.remove()
 	}
 
 	#slideToClose = (): void => {

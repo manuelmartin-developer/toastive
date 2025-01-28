@@ -54,6 +54,7 @@ The `showToastive()` method is the simplest way to show a toast notification. It
 |------------|-------------|---------|---------|---------|
 | autoClose  | Auto close the toast after a specified time (in milliseconds). | boolean | true |
 | closeButton | Show a close button in the toast. | boolean | false |
+| draggable  | Allow the toast to be closed by dragging it. | boolean | true |
 | duration   | The duration of the toast in milliseconds (only if \`autoClose\` is set to \`true\`). | number | 5000 |
 | message    | The message to display in the toast. | string | '' |
 | title      | The title of the toast. | string | '' |
@@ -126,7 +127,7 @@ const toast = showToastive({
 toast.close()
 ```
 
-> **All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices.**
+> **All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices. You can disable this feature by setting the `draggable` property to `false`.**
 
 <br />
 ### Updating a toastive

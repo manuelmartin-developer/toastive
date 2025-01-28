@@ -4,7 +4,8 @@
  * @readonly
  *
  * @property {string} AutoClose - Auto close the toast
- * @property {string} closeButton - Show close button
+ * @property {string} CloseButton - Show close button
+ * @property {string} Draggable - Draggable the toast
  * @property {string} Duration - Duration of the toast
  * @property {string} Title - Title of the toast
  * @property {string} Message - Message of the toast
@@ -13,7 +14,8 @@
  */
 export enum ToastiveProp {
 	AutoClose = 'autoClose',
-	closeButton = 'closeButton',
+	CloseButton = 'closeButton',
+	Draggable = 'draggable',
 	Duration = 'duration',
 	Title = 'title',
 	Message = 'message',
@@ -65,6 +67,7 @@ export enum ToastivePosition {
  *
  * @property {boolean} [autoClose] - Auto close the toast
  * @property {boolean} [closeButton] - Show close button
+ * @property {boolean} [draggable] - Draggable the toast
  * @property {number} [duration] - Duration of the toast
  * @property {string} [title] - Title of the toast
  * @property {string} [message] - Message of the toast
@@ -73,7 +76,8 @@ export enum ToastivePosition {
  */
 export interface ToastiveProps {
 	[ToastiveProp.AutoClose]?: boolean
-	[ToastiveProp.closeButton]?: boolean
+	[ToastiveProp.CloseButton]?: boolean
+	[ToastiveProp.Draggable]?: boolean
 	[ToastiveProp.Duration]?: number
 	[ToastiveProp.Title]?: string
 	[ToastiveProp.Message]?: string

@@ -38,6 +38,17 @@ const meta: Meta<ToastiveProps> = {
 				required: false
 			}
 		},
+		draggable: {
+			control: {
+				type: 'boolean'
+			},
+			description: 'Make the toast closeable by dragging',
+			name: 'Draggable',
+			type: {
+				name: 'boolean',
+				required: false
+			}
+		},
 		duration: {
 			control: {
 				type: 'number'
@@ -110,6 +121,7 @@ export const playground: StoryObj<ToastiveProps> = (args: ToastiveProps) => {
 		showToastive({
 			autoClose: args.autoClose,
 			closeButton: args.closeButton,
+			draggable: args.draggable,
 			duration: args.duration,
 			message: args.message,
 			position: args.position,
@@ -141,6 +153,7 @@ playground.argTypes = meta.argTypes
 playground.args = {
 	autoClose: undefined,
 	closeButton: undefined,
+	draggable: undefined,
 	duration: undefined,
 	message: "👋 Hi there, I'm a toast!!",
 	position: undefined,

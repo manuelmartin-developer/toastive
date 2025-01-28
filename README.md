@@ -1,4 +1,4 @@
-![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label) [![npm](https://img.shields.io/npm/v/toastive.svg)](https://www.npmjs.com/package/toastive) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/toastive?style=flat-square)](https://bundlephobia.com/package/toastive@latest) [![install size](https://packagephobia.com/badge?p=toastive)](https://packagephobia.com/result?p=toastive) [![npm downloads](https://img.shields.io/npm/dt/toastive.svg?style=flat-square)](https://npm-stat.com/charts.html?package=toastive)
+![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label) [![npm](https://img.shields.io/npm/v/toastive.svg)](https://www.npmjs.com/package/toastive) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/toastive@latest?style=flat-square)](https://bundlephobia.com/package/toastive@latest) [![install size](https://packagephobia.com/badge?p=toastive@latest)](https://packagephobia.com/result?p=toastive@latest) [![npm downloads](https://img.shields.io/npm/dt/toastive.svg?style=flat-square)](https://npm-stat.com/charts.html?package=toastive)
 
 <!-- Logo -->
 <p align="center">
