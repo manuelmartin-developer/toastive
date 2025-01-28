@@ -1,42 +1,43 @@
-* {
-	box-sizing: border-box;
-}
-
 mm-toastive-wrapper {
 	--gap: var(--toastive-wrapper-gap, 1rem);
 	--vertical-offset: var(--toastive-wrapper-vertical-offset, 1rem);
 	--horizontal-offset: var(--toastive-wrapper-horizontal-offset, 1rem);
 
-	display: grid;
+	align-items: center;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	gap: var(--gap);
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr;
-
 	height: fit-content;
 	padding: 0;
 	pointer-events: none;
 	position: fixed;
+	transition: max-height 0.3s ease-in-out;
 	width: fit-content;
 	z-index: 9999;
 }
 
 mm-toastive-wrapper.top-left {
+	justify-content: flex-start;
 	left: var(--horizontal-offset);
 	top: var(--vertical-offset);
 }
 
 mm-toastive-wrapper.top-right {
+	justify-content: flex-start;
 	right: var(--horizontal-offset);
 	top: var(--vertical-offset);
 }
 
 mm-toastive-wrapper.bottom-left {
 	bottom: var(--vertical-offset);
+	justify-content: flex-end;
 	left: var(--horizontal-offset);
 }
 
 mm-toastive-wrapper.bottom-right {
 	bottom: var(--vertical-offset);
+	justify-content: flex-end;
 	right: var(--horizontal-offset);
 }
 

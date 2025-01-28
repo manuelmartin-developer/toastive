@@ -1,4 +1,4 @@
-import{j as e,M as l,a as o,S as r,C as c,b as n}from"./index-AKaiPiw4.js";import{useMDXComponents as a}from"./index-CoVQ9bSo.js";import{T as h,p as d,c as p,u as f}from"./toastive.stories-CGprLUDS.js";import"./iframe-D9i1eKam.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-7SSfYZ8z.js";import"./index-ogSvIofg.js";function i(s){const t={a:"a",blockquote:"blockquote",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(l,{of:h}),`
+import{j as e,M as l,a as o,S as r,C as c,b as n}from"./index-Bm3ZFFVO.js";import{useMDXComponents as i}from"./index-zYc6u2_q.js";import{T as h,p as d,c as p,u as f}from"./toastive.stories-Cr8KfbjL.js";import"./iframe-B1fkpJU2.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-7SSfYZ8z.js";import"./index-ogSvIofg.js";function a(s){const t={a:"a",blockquote:"blockquote",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...i(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(l,{of:h}),`
 `,e.jsx(t.h2,{id:"-overview",children:"👀 Overview"}),`
 `,e.jsx(t.p,{children:"Toastive is a lightweight, highly customizable, and easy-to-use native web component library for creating toast notifications."}),`
 `,e.jsx(t.p,{children:"Some of the key features include:"}),`
@@ -32,6 +32,7 @@ import{j as e,M as l,a as o,S as r,C as c,b as n}from"./index-AKaiPiw4.js";impor
 |------------|-------------|---------|---------|---------|
 | autoClose  | Auto close the toast after a specified time (in milliseconds). | boolean | true |
 | closeButton | Show a close button in the toast. | boolean | false |
+| draggable  | Allow the toast to be closed by dragging it. | boolean | true |
 | duration   | The duration of the toast in milliseconds (only if \`autoClose\` is set to \`true\`). | number | 5000 |
 | message    | The message to display in the toast. | string | '' |
 | title      | The title of the toast. | string | '' |
@@ -85,7 +86,7 @@ showToastive({
 toast.close()
 `})}),`
 `,e.jsxs(t.blockquote,{children:[`
-`,e.jsx(t.p,{children:e.jsx(t.strong,{children:"All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices."})}),`
+`,e.jsx(t.p,{children:e.jsxs(t.strong,{children:["All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices. You can disable this feature by setting the ",e.jsx(t.code,{children:"draggable"})," property to ",e.jsx(t.code,{children:"false"}),"."]})}),`
 `]}),`
 `,e.jsx("br",{}),`
 `,e.jsx(t.h3,{id:"updating-a-toastive",children:"Updating a toastive"}),`
@@ -214,4 +215,4 @@ variables.`}),`
 `})}),`
 `,e.jsx(t.h2,{id:"playground",children:"Playground"}),`
 `,e.jsx(t.p,{children:"All these properties and styles can be easily tested in our playground."}),`
-`,e.jsx(t.p,{children:e.jsx(t.a,{href:"/story/documentation-toastive--playground",children:"Open the playground"})})]})}function T(s={}){const{wrapper:t}={...a(),...s.components};return t?e.jsx(t,{...s,children:e.jsx(i,{...s})}):i(s)}export{T as default};
+`,e.jsx(t.p,{children:e.jsx(t.a,{href:"/story/documentation-toastive--playground",children:"Open the playground"})})]})}function T(s={}){const{wrapper:t}={...i(),...s.components};return t?e.jsx(t,{...s,children:e.jsx(a,{...s})}):a(s)}export{T as default};

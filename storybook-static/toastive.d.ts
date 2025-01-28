@@ -3,6 +3,7 @@ export default class MmToastive extends HTMLElement {
     #private;
     autoClose: boolean;
     closeButton: boolean;
+    draggable: boolean;
     duration: number;
     icon: boolean;
     title: string;
