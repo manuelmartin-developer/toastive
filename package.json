@@ -2,6 +2,7 @@
   "name": "toastive",
   "sideEffects": false,
   "version": "1.2.0",
+  "packageManager": "pnpm@11.15.0",
   "author": {
     "name": "Manuel Martín",
     "email": "hola@manuelmartin.dev",
