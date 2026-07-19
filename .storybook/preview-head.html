@@ -1,7 +1,6 @@
 <style>
   html body * {
     font-family: Helvetica, Arial, sans-serif !important;
-    /* font-size: 1em !important; */
   }
 
   h2 {
@@ -9,28 +8,100 @@
   }
 
   p, ul, ol, code, pre {
-    font-size: 1em !important; 
+    font-size: 1em !important;
   }
 
+  /* -----------------------------------------------------------------------
+     Docs tables (.doc-table) — used directly in MDX
+     ----------------------------------------------------------------------- */
+  table.doc-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0.75rem 0 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    background: #ffffff;
+  }
+  table.doc-table thead th {
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    color: #0f172a;
+    font-weight: 700;
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+    letter-spacing: 0.01em;
+  }
+  table.doc-table tbody td {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    padding: 0.6rem 0.9rem;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  table.doc-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  table.doc-table tbody tr:hover td {
+    background: #fafbfc;
+  }
+  table.doc-table code {
+    background: rgba(15, 23, 42, 0.07);
+    border-radius: 4px;
+    color: #b91c1c;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    font-size: 0.85em;
+    padding: 1px 6px;
+  }
+  table.doc-table tbody td:first-child code {
+    color: #0e6cb3;
+  }
+
+  /* -----------------------------------------------------------------------
+     Playground buttons — minimal, neutral, two styles only
+     ----------------------------------------------------------------------- */
   button.playground {
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    background-color: #fff;
-    color: #7d7979;
-    font-size: 1rem;
+    font-family: inherit !important;
+    margin: 0 0.2rem 0.3rem;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid #d4d4d8;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #18181b;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.3;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  button.playground.secondary {
-    background-color: #5f5b5b;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+      transform 0.08s ease;
+    white-space: nowrap;
   }
 
   button.playground:hover {
-    background-color: #5f5b5b;
-    color: #fff;
+    background: #f4f4f5;
+    border-color: #a1a1aa;
   }
 
+  button.playground:active {
+    transform: translateY(0.5px);
+  }
+
+  button.playground:focus-visible {
+    border-color: #18181b;
+    outline: none;
+  }
+
+  /* Muted (ghost) — used for tertiary actions like "Clear all", "Reset" */
+  button.playground--muted {
+    background: transparent;
+    border-color: transparent;
+    color: #71717a;
+  }
+  button.playground--muted:hover {
+    background: #f4f4f5;
+    border-color: #e4e4e7;
+    color: #18181b;
+  }
 </style>

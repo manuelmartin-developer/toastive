@@ -1,13 +1,15 @@
-import { Meta } from '@storybook/web-components'
+import { Meta, StoryObj } from '@storybook/web-components-vite'
 
 const meta: Meta = {
-	parameters: {
-		layout: 'centered'
-	},
-	title: 'Changelog/Changelog'
+  parameters: {
+    layout: 'centered'
+  },
+  title: 'Changelog/Changelog'
 }
 
 export default meta
 
-export const Playground = () => ''
-Playground.tags = ['auto-docs', '!dev']
+export const Playground: StoryObj = {
+  render: () => '',
+  tags: ['auto-docs', '!dev']
+}

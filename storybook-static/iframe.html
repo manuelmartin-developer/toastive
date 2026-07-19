@@ -1,7 +1,7 @@
 <!doctype html>
 <!--suppress HtmlUnknownTarget -->
 <html lang="en">
-  <head>
+  <head><script type="module" src="./vite-inject-mocker-entry.js"></script>
     <meta charset="utf-8" />
     <title>Storybook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,10 +45,10 @@
       window.LOGLEVEL = 'info';
       window.FRAMEWORK_OPTIONS = {};
       window.CHANNEL_OPTIONS = {};
-      window.FEATURES = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true};
+      window.FEATURES = {"actions":true,"argTypeTargetsV7":true,"babelRemoveBugfixes":false,"backgrounds":true,"changeDetection":true,"componentsManifest":false,"controls":true,"disallowImplicitActionsInRenderV8":true,"highlight":true,"interactions":true,"legacyDecoratorFileOrder":false,"measure":true,"outline":true,"menuOnboardingChecklist":true,"sidebarOnboardingChecklist":true,"viewport":true};
       window.STORIES = [{"titlePrefix":"","directory":"./__docs__","files":"**/*.docs.mdx","importPathMatcher":"^\\.[\\\\/](?:__docs__(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.docs\\.mdx)$"},{"titlePrefix":"","directory":"./__docs__","files":"**/*.stories.ts","importPathMatcher":"^\\.[\\\\/](?:__docs__(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.ts)$"}];
-      window.DOCS_OPTIONS = {"defaultName":"Docs","autodocs":"tag"};
-      window.TAGS_OPTIONS = {"dev-only":{"excludeFromDocsStories":true},"docs-only":{"excludeFromSidebar":true},"test-only":{"excludeFromSidebar":true,"excludeFromDocsStories":true}};
+      window.DOCS_OPTIONS = {"defaultName":"Docs"};
+      window.TAGS_OPTIONS = {};
 
       
 
@@ -60,8 +60,7 @@
     <base target="_parent" />
 
 <style>
-  /* While we aren't showing the main block yet, but still preparing, we want everything the user
-     has rendered, which may or may not be in #storybook-root, to be display none */
+  /* While we aren't showing the main block yet, but still preparing, we want everything the user has rendered, which may or may not be in #storybook-root, to be display none */
   .sb-show-preparing-story:not(.sb-show-main) > :not(.sb-preparing-story) {
     display: none;
   }
@@ -170,7 +169,13 @@
     margin: auto;
     padding: 30px;
     border-radius: 10px;
-    background: rgba(0, 0, 0, 0.03);
+    background: rgb(247, 247, 247);
+    color: rgb(46, 52, 56);
+  }
+
+  .sb-nopreview_main * {
+    background: rgb(247, 247, 247);
+    color: rgb(46, 52, 56);
   }
 
   .sb-nopreview_heading {
@@ -184,49 +189,6 @@
     width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
-
-    & ol {
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    & h1 {
-      font-family: Nunito Sans;
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 30px;
-      font-weight: normal;
-      margin: 0;
-
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: #ff4400;
-        border-radius: 50%;
-        margin-right: 8px;
-      }
-    }
-
-    & p,
-    & ol {
-      font-family: Nunito Sans;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      margin: 0;
-    }
-
-    & li + li {
-      margin: 0;
-      padding: 0;
-      padding-top: 12px;
-    }
-
-    & a {
-      color: currentColor;
-    }
   }
 
   .sb-errordisplay_main {
@@ -240,12 +202,68 @@
     width: 100%;
     border-radius: 6px;
     background: white;
+    color: black;
     border: 1px solid #ff0000;
     box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
     gap: 24px;
   }
 
-  .sb-errordisplay_code {
+  .sb-errordisplay_main ol {
+    padding-left: 18px;
+    margin: 0;
+  }
+
+  /* Redefine colors to ensure readability regardless of user-provided * selectors. */
+  .sb-errordisplay_main * {
+    background: white;
+    color: black;
+  }
+
+  /* Exclude error code block from the universal reset to preserve ANSI colors and dark theme */
+  .sb-errordisplay_main .sb-errordisplay_code,
+  .sb-errordisplay_main .sb-errordisplay_code * {
+    background: #242424;
+    color: #c6c6c6;
+  }
+
+  .sb-errordisplay_main h1 {
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 0;
+  }
+
+  .sb-errordisplay_main h1::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ff4400;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+
+  .sb-errordisplay_main p,
+  .sb-errordisplay_main ol {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0;
+  }
+
+  .sb-errordisplay_main li + li {
+    margin: 0;
+    padding: 0;
+    padding-top: 12px;
+  }
+
+  .sb-errordisplay_main a {
+    color: currentColor;
+  }
+
+  .sb-errordisplay_main .sb-errordisplay_code {
     padding: 10px;
     flex: 1;
     background: #242424;
@@ -257,15 +275,20 @@
     line-height: 19px;
     border-radius: 4px;
 
-    font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
+    font-family:
+      'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
       'Lucida Console', Consolas, Monaco, monospace;
     margin: 0;
     overflow: auto;
   }
 
-  .sb-errordisplay pre {
+  .sb-errordisplay_main .sb-errordisplay_code code {
+    background-color: inherit;
+    color: inherit;
+  }
+
+  .sb-errordisplay_main .sb-errordisplay_code {
     white-space: pre-wrap;
-    white-space: revert;
   }
 
   @-webkit-keyframes sb-rotate360 {
@@ -492,11 +515,31 @@
     margin-bottom: 4px;
     padding: 2px 5px;
   }
+
+  .sb-sr-only,
+  .sb-hidden-until-focus:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: none;
+  }
+
+  .sb-hidden-until-focus {
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+  }
+
+  .sb-hidden-until-focus:focus {
+    opacity: 1;
+  }
 </style>
 
 <script>
   /* globals window */
-  /* eslint-disable no-underscore-dangle */
   try {
     if (window.top !== window) {
       window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -511,7 +554,6 @@
 <style>
   html body * {
     font-family: Helvetica, Arial, sans-serif !important;
-    /* font-size: 1em !important; */
   }
 
   h2 {
@@ -519,33 +561,110 @@
   }
 
   p, ul, ol, code, pre {
-    font-size: 1em !important; 
+    font-size: 1em !important;
   }
 
+  /* -----------------------------------------------------------------------
+     Docs tables (.doc-table) — used directly in MDX
+     ----------------------------------------------------------------------- */
+  table.doc-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0.75rem 0 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    background: #ffffff;
+  }
+  table.doc-table thead th {
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    color: #0f172a;
+    font-weight: 700;
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+    letter-spacing: 0.01em;
+  }
+  table.doc-table tbody td {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    padding: 0.6rem 0.9rem;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  table.doc-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  table.doc-table tbody tr:hover td {
+    background: #fafbfc;
+  }
+  table.doc-table code {
+    background: rgba(15, 23, 42, 0.07);
+    border-radius: 4px;
+    color: #b91c1c;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    font-size: 0.85em;
+    padding: 1px 6px;
+  }
+  table.doc-table tbody td:first-child code {
+    color: #0e6cb3;
+  }
+
+  /* -----------------------------------------------------------------------
+     Playground buttons — minimal, neutral, two styles only
+     ----------------------------------------------------------------------- */
   button.playground {
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    background-color: #fff;
-    color: #7d7979;
-    font-size: 1rem;
+    font-family: inherit !important;
+    margin: 0 0.2rem 0.3rem;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid #d4d4d8;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #18181b;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.3;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  button.playground.secondary {
-    background-color: #5f5b5b;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+      transform 0.08s ease;
+    white-space: nowrap;
   }
 
   button.playground:hover {
-    background-color: #5f5b5b;
-    color: #fff;
+    background: #f4f4f5;
+    border-color: #a1a1aa;
   }
 
+  button.playground:active {
+    transform: translateY(0.5px);
+  }
+
+  button.playground:focus-visible {
+    border-color: #18181b;
+    outline: none;
+  }
+
+  /* Muted (ghost) — used for tertiary actions like "Clear all", "Reset" */
+  button.playground--muted {
+    background: transparent;
+    border-color: transparent;
+    color: #71717a;
+  }
+  button.playground--muted:hover {
+    background: #f4f4f5;
+    border-color: #e4e4e7;
+    color: #18181b;
+  }
 </style>
 
-    <script type="module" crossorigin src="./assets/iframe-B1fkpJU2.js"></script>
+    <script type="module" crossorigin src="./assets/iframe-Cqu2HCVM.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BdFrVu1K.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5GYAEUAU-DzcWhIfH.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-IMSF75WX-Chuxd80a.js">
+    <link rel="modulepreload" crossorigin href="./assets/docs-tools-Y0kqGnxn.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-UAWMPV5J-DqXKtdy0.js">
   </head>
 
   <body>
@@ -671,5 +790,31 @@
 
     <div id="storybook-root"></div>
     <div id="storybook-docs"></div>
+    <script>
+      function __onViteAppLoadingError(event) {
+        const hostname = globalThis.location.hostname;
+        if (hostname !== 'localhost' && globalThis.CONFIG_TYPE === 'DEVELOPMENT') {
+          const message = `Failed to load the Storybook preview file 'vite-app.js':
+
+      It looks like you're visiting the Storybook development server on another hostname than localhost: '${hostname}', but you haven't configured the necessary security features to support this.
+      Please re-run your Storybook development server with the '--host ${hostname}' flag, or manually configure your Vite allowedHosts configuration with viteFinal.
+
+      See:`;
+          const docs = [
+            'https://storybook.js.org/docs/api/cli-options#dev',
+            'https://storybook.js.org/docs/api/main-config/main-config-vite-final',
+            'https://vite.dev/config/server-options.html#server-allowedhosts',
+          ];
+          console.error(`${message}\n${docs.map((doc) => `- ${doc}`).join('\n')}`);
+
+          document.getElementById('storybook-root').innerHTML =
+            `<p style="color: red; max-width: 70ch">${message.replaceAll(
+              '\n',
+              '<br/>'
+            )}<ul>${docs.map((doc) => `<li><a href='${doc}' target='_blank'>${doc}</a></li>`).join('')}</ul></p>`;
+          return;
+        }
+      }
+    </script>
   </body>
 </html>
