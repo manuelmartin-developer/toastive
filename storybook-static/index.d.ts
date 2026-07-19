@@ -1,3 +1,5 @@
-export type { ToastiveProps } from './toastive.types';
-export { ToastivePosition, ToastiveProp, ToastiveVariant } from './toastive.types';
-export { showToastive } from './showToastive';
+export type { ToastiveAction, ToastiveDefaults, ToastiveProps } from './toastive.types.js';
+export { ToastivePosition, ToastiveProp, ToastiveTheme, ToastiveVariant } from './toastive.types.js';
+export { default as MmToastive } from './toastive.js';
+export type { ToastiveInstance } from './toastive.types.js';
+export { clearToasts, resetDefaults, setDefaults, showToastive } from './showToastive.js';

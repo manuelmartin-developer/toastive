@@ -1,364 +1,1076 @@
-import { ColorItem, ColorPalette, Markdown, Meta, Story } from '@storybook/blocks'
+import { ColorItem, ColorPalette, Meta, Story } from '@storybook/addon-docs/blocks'
 import * as ToastiveStories from './toastive.stories'
 
 <Meta of={ToastiveStories} />
 
-## 👀 Overview
+# Toastive
 
-Toastive is a lightweight, highly customizable, and easy-to-use native web component library for creating toast notifications.
+A lightweight, accessible, fully customizable web component library for toast notifications — drop-in for **any** frontend stack.
 
-Some of the key features include:
-
-- 🪶 **Lightweight**: The minified version is less than 5KB.
-- 🎨 **Customizable**: Easily customize the appearance of the toasts. More than 30 css variables to styling a toast that you will love.
-- 🚀 **Easy to use**: Just one `showToastive()` method is enought!.
-- 📦 **Zero dependencies**: No dependencies required.
-- 🌐 **Cross-browser**: Works in all modern or older browser that suporrt web components.
-- 📱 **Responsive**: Works on all devices.
-- 🌈 **Themes**: Comes with variants out of the box.
+- 🪶 Lightweight: ~6 KB gzipped, zero dependencies.
+- ♿ Accessible: ARIA roles, keyboard support, focus management, prefers-reduced-motion.
+- 🎨 Customizable: 30+ CSS variables to style every detail.
+- 🚀 Easy to use: one function call — `showToastive(props)`.
+- 📦 Zero dependencies: ESM-only, no runtime deps.
+- 🌐 Framework-agnostic: vanilla web component, works with React, Vue, Svelte, Angular.
+- ⏸ `pauseOnHover`: timer pauses on hover/focus.
+- 🖐 Drag to dismiss: vertical drag toward the toast's corner.
+- 🌈 Themes: 6 variants + light/dark color themes.
 
 <br />
 
 ## 📦 Installation
 
-### NPM
-
 ```bash
 npm install toastive
-```
-
-### Yarn
-
-```bash
+# or
+pnpm add toastive
+# or
 yarn add toastive
 ```
 
 <br />
-## 🚀 Usage
 
-Toastive element is, at the end of the day, a web component. So, you can use it like any other web component. However, we also provide a simple API to make it easier to use.
-
-### Import the module
+## 🚀 Quick start
 
 ```javascript
-import { showToastive } from 'toastive'
+import { showToastive, ToastivePosition, ToastiveVariant } from 'toastive'
+
+showToastive({
+  title: 'Saved',
+  message: 'Your changes have been stored.',
+  variant: ToastiveVariant.Success,
+  position: ToastivePosition.TopRight
+})
 ```
 
-### `showToastive()`
+That's it — the toast appears, auto-closes after 5 s, and is fully accessible.
 
-The `showToastive()` method is the simplest way to show a toast notification. It accepts an object with the following properties:
+<Story of={ToastiveStories.quickStart} />
 
-<Markdown>
-	{`
-| Property   | Description | Type    | Default |
-|------------|-------------|---------|---------|---------|
-| autoClose  | Auto close the toast after a specified time (in milliseconds). | boolean | true |
-| closeButton | Show a close button in the toast. | boolean | false |
-| draggable  | Allow the toast to be closed by dragging it. | boolean | true |
-| duration   | The duration of the toast in milliseconds (only if \`autoClose\` is set to \`true\`). | number | 5000 |
-| message    | The message to display in the toast. | string | '' |
-| title      | The title of the toast. | string | '' |
-| position   | The position of the toast. | ToastivePosition | 'bottom-right' |
-| variant	| The variant of the toast. | ToastiveVariant | 'default' |
-	`}
-</Markdown>
+<br />
 
-### Types
+## 🧬 Variants
 
-Toastive library is fully developed with TypeScript. So, you can use the types in your project.
+Six built-in variants. Each one picks its own ARIA role:
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Variant</th>
+      <th>Role</th>
+      <th>aria-live</th>
+      <th>When to use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>default</code>
+      </td>
+      <td>
+        <code>status</code>
+      </td>
+      <td>
+        <code>polite</code>
+      </td>
+      <td>Generic messages</td>
+    </tr>
+    <tr>
+      <td>
+        <code>success</code>
+      </td>
+      <td>
+        <code>status</code>
+      </td>
+      <td>
+        <code>polite</code>
+      </td>
+      <td>Successful actions</td>
+    </tr>
+    <tr>
+      <td>
+        <code>info</code>
+      </td>
+      <td>
+        <code>status</code>
+      </td>
+      <td>
+        <code>polite</code>
+      </td>
+      <td>Tips, neutral info</td>
+    </tr>
+    <tr>
+      <td>
+        <code>loading</code>
+      </td>
+      <td>
+        <code>status</code>
+      </td>
+      <td>
+        <code>polite</code>
+      </td>
+      <td>Async work in progress</td>
+    </tr>
+    <tr>
+      <td>
+        <code>warning</code>
+      </td>
+      <td>
+        <code>alert</code>
+      </td>
+      <td>
+        <code>assertive</code>
+      </td>
+      <td>Warnings, recoverable errors</td>
+    </tr>
+    <tr>
+      <td>
+        <code>error</code>
+      </td>
+      <td>
+        <code>alert</code>
+      </td>
+      <td>
+        <code>assertive</code>
+      </td>
+      <td>Failures, must-read errors</td>
+    </tr>
+  </tbody>
+</table>
+
+Error & warning use `alert` so screen readers announce them immediately.
+
+<Story of={ToastiveStories.variants} />
+
+<br />
+
+## 📍 Positions
+
+Six positions — toasts in different positions stack independently.
+
+<Story of={ToastiveStories.positions} />
+
+<br />
+
+## 🌓 Theming
+
+Each toast accepts `theme: ToastiveTheme.Light | ToastiveTheme.Dark`. The theme is **per toast** (it does not auto-detect from the OS), so you stay in full control. A global default can be set with `setDefaults({ theme: ToastiveTheme.Dark })`.
+
+```javascript
+import { showToastive, ToastiveTheme } from 'toastive'
+
+showToastive({
+  message: 'Looks good in dark mode too',
+  theme: ToastiveTheme.Dark
+})
+```
+
+<Story of={ToastiveStories.themes} />
+
+<br />
+
+## ⏱ Behaviors
+
+### Auto-close & pause on hover
+
+By default the toast auto-closes after `duration` (5 s). Hover or focus the toast to **pause** both the timer and the progress bar; move away to resume.
+
+<Story of={ToastiveStories.pauseOnHover} />
+
+Disable per toast:
+
+```javascript
+showToastive({
+  message: 'Strict timer',
+  pauseOnHover: false
+})
+```
+
+### `prefers-reduced-motion`
+
+If the user has reduced-motion enabled at the OS level, all slide/close animations are skipped. The toast appears and disappears instantly, the progress bar is hidden, and the drag-to-dismiss snap-back is removed. No opt-in required.
+
+### Drag to dismiss
+
+Every toast is draggable by default. Drag vertically toward the toast's corner — **up** for top-positioned toasts, **down** for bottom-positioned ones — past a 50 px threshold to dismiss. Reverse direction is ignored so the toast never opens the wrong way.
+
+Disable per toast with `draggable: false`.
+
+### Cap per corner (`maxVisible`)
+
+Limit active toasts per position. When the cap is reached, the **oldest** toast is closed (FIFO) before the new one is added.
+
+<Story of={ToastiveStories.maxVisible} />
+
+Globally:
+
+```javascript
+import { setDefaults } from 'toastive'
+
+setDefaults({ maxVisible: 5 }) // each corner holds at most 5 toasts
+```
+
+<br />
+
+## 🧱 Patterns & recipes
+
+Common end-to-end patterns with ready-to-copy snippets.
+
+### Action button — Undo, Retry, View
+
+Add a secondary button (typically "Undo", "Retry", "View"). By default, clicking it closes the toast. Pass `closeOnClick: false` to keep it open.
+
+```javascript
+showToastive({
+  message: 'File deleted',
+  variant: ToastiveVariant.Default,
+  autoClose: false,
+  closeButton: true,
+  action: {
+    label: 'Undo',
+    onClick: () => restoreFile(),
+    closeOnClick: true // default
+  }
+})
+```
+
+<Story of={ToastiveStories.actionButton} />
+
+### Update a live toast — loading → success
+
+`showToastive()` returns an instance with `update()` and `close()`. The DOM diffs in place — no re-creation, no animation restart (except `duration`, which restarts the progress bar).
+
+```javascript
+const toast = showToastive({
+  title: 'Uploading',
+  message: 'Please wait...',
+  variant: ToastiveVariant.Loading,
+  autoClose: false
+})
+
+await upload()
+
+toast.update({
+  title: 'Done',
+  message: 'Upload complete.',
+  variant: ToastiveVariant.Success,
+  autoClose: true
+})
+```
+
+<Story of={ToastiveStories.updateInPlace} />
+
+### Global defaults
+
+Use `setDefaults()` to apply options to every subsequent `showToastive()` call. Defaults are **merged**, not replaced — pass only the fields you want to change.
+
+```javascript
+import { setDefaults, ToastivePosition, ToastiveTheme } from 'toastive'
+
+setDefaults({
+  position: ToastivePosition.TopRight,
+  duration: 3000,
+  theme: ToastiveTheme.Dark
+})
+```
+
+<Story of={ToastiveStories.globalDefaults} />
+
+### Clearing toasts
+
+Use `clearToasts()` to remove active toasts. Pass a position to scope the clear; omit to remove everything.
+
+```javascript
+import { clearToasts, ToastivePosition } from 'toastive'
+
+clearToasts() // remove every toast
+clearToasts(ToastivePosition.TopRight) // only top-right corner
+```
+
+<Story of={ToastiveStories.clearingToasts} />
+
+### Custom icons
+
+Pass an HTML string via `customIcon` to override the default per-variant icon.
+
+```javascript
+showToastive({
+  message: 'Custom icon',
+  customIcon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
+})
+```
+
+<Story of={ToastiveStories.customIcon} />
+
+<br />
+
+## ♿ Accessibility
+
+Toastive is accessible by default — no configuration required:
+
+- **`role` & `aria-live`** are set on the host element based on variant (`polite` for info/success/loading, `assertive` for error/warning).
+- **`aria-atomic="true"`** — screen readers re-announce the whole toast on each update.
+- **Close button** has `aria-label="Close notification"`.
+- **Keyboard support** — every toast is `tabindex="0"`. Tab to it, press <kbd>Esc</kbd> to close.
+- **`prefers-reduced-motion`** — slide/close animations are skipped, drag snap-back removed, progress bar hidden.
+- **Visible focus ring** on the toast when reached with the keyboard.
+
+<br />
+
+## 🌍 Framework integrations
+
+Toastive is a Custom Element (`<mm-toastive>`) plus a one-call API. Because it ships as a Web Component, it works anywhere Custom Elements are supported. The only rule: **import `toastive` on the client side only** — it throws on SSR.
+
+### Vanilla JS / TypeScript
 
 ```typescript
-import { ToastivePosition, ToastiveProps, ToastiveVariant } from 'toastive'
-```
+import { showToastive } from 'toastive'
 
-### Example
-
-```javascript
-import { showToastive, ToastiveProps, ToastivePosition, ToastiveVariant } from 'toastive'
-
-showToastive({
-	title: 'Toastive',
-	message: '👋 Hi from top-right corner!',
-	position: ToastivePosition.TopRight,
-	variant: ToastiveVariant.Success,
-	autoClose: true,
-	duration: 5000,
-	closeButton: false
+document.querySelector('#save')?.addEventListener('click', () => {
+  showToastive({ message: 'Saved!', variant: 'success' })
 })
 ```
 
-Code above will show a toast notification with a success variant, a title, and a message. The toast will be displayed in the top-right corner of the screen and will automatically close after 5 seconds.
+### React 19+
 
-<Story of={ToastiveStories.propsExample} />
+React 19 ships Custom Element support out of the box. The `showToastive` API uses no JSX, so there is nothing to wire up — just call it from a handler.
 
-<br />
-### Closing a toastive
+```tsx
+import { showToastive, ToastiveVariant } from 'toastive'
 
-Toasts are widely used in applications to show notifications to users. However, these notifications should not be blocking the user, so in terms of UX, it is advisable to use the default `autoClose` property.
-
-However, sometimes you may want to allow the user to close the toast manually. You can do this by setting the `closeButton` property to `true`.
-
-```javascript
-showToastive({
-	title: 'Toastive',
-	message: '👋 Hi from top-right corner!',
-	position: ToastivePosition.TopRight,
-	variant: ToastiveVariant.Success,
-	autoClose: false,
-	closeButton: true
-})
-```
-
-<Story of={ToastiveStories.closeButtonExample} />
-
-Additionally, you can close a toastive manually by calling the `close()` method.
-
-```javascript
-const toast = showToastive({
-	title: 'Toastive',
-	message: '👋 Hi from top-right corner!',
-	position: ToastivePosition.TopRight,
-	variant: ToastiveVariant.Success,
-	autoClose: false,
-	closeButton: true
-})
-
-// Do something...
-toast.close()
-```
-
-> **All toast can be closed by dragging them to the right or left side of the screen, depending on the position of the toast. These gestures are enabled by default and it's fully compatible with touch devices. You can disable this feature by setting the `draggable` property to `false`.**
-
-<br />
-### Updating a toastive
-
-You can update a toastive by calling the `update()` method. This method accepst same properties as `showToastive()` method, except the `position` property.
-
-```javascript
-const toast = showToastive({
-	title: 'Toastive',
-	message: '👋 Hi from top-right corner!',
-	position: ToastivePosition.TopRight,
-	variant: ToastiveVariant.Loading,
-	autoClose: false
-})
-
-// Do something...
-toast.update({
-	title: 'Updated title',
-	message: 'Updated message',
-	variant: ToastiveVariant.Success,
-	autoClose: true
-})
-```
-
-<Story of={ToastiveStories.updatedPropsExample} />
-
-<br />
-## 🎨 Color pallete
-
-<ColorPalette>
-	<ColorItem
-		name="Default & Loading"
-		subtitle="Default color pallete"
-		colors={{
-			Background: '#fff',
-			Border: '#ededed',
-			Content: '#333'
-		}}
-	/>
-	<ColorItem
-		name="Info"
-		subtitle="Info color pallete"
-		colors={{
-			Background: '#f0f8ff',
-			Border: '#b0e2ff',
-			Content: '#0973dc'
-		}}
-	/>
-	<ColorItem
-		name="Error"
-		subtitle="Error color pallete"
-		colors={{
-			Background: '#fff0f0',
-			Border: '#ffe0e1',
-			Content: '#e60000'
-		}}
-	/>
-	<ColorItem
-		name="Warning"
-		subtitle="Warning color pallete"
-		colors={{
-			Background: '#fffcf0',
-			Border: '#fdf5d3',
-			Content: '#dc7609'
-		}}
-	/>
-	<ColorItem
-		name="Success"
-		subtitle="Success color pallete"
-		colors={{
-			Background: '#ecfdf3',
-			Border: '#d3fde5',
-			Content: '#008a2e'
-		}}
-	/>
-</ColorPalette>
-
-<br />
-## 💅 Styling
-
-Toastive is fully customizable. You can easily customize the appearance of the toasts by using next CSS
-variables.
-
-### Wrapper
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-wrapper-horizontal-offset | The horizontal offset of the toast wrapper. | 1rem |
-| --toastive-wrapper-vertical-offset | The vertical offset of the toast wrapper. | 1rem |
-| --toastive-wrapper-gap | The gap between toasts. | 1rem |
-
-    `}
-
-</Markdown>
-
-### Font
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-font-family | The font family of the toast. | inherit |
-| --toastive-font-size | The font size of the toast. | 0.8rem |
-
-    `}
-
-</Markdown>
-
-### Colors
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-content-color | The color of the toast content. | #333 |
-| --toastive-background-color | The background color of the toast. | #fff |
-
-    `}
-
-</Markdown>
-
-### Border
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-border-radius | The border radius of the toast. | 0.25rem |
-| --toastive-border-width | The border width of the toast. | 1px |
-| --toastive-border-color | The border color of the toast. | #ededed |
-
-    `}
-
-</Markdown>
-
-### Shadow
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-box-shadow | The box shadow of the toast. | 0 4px 12px rgba(0, 0, 0, 0.1) |
-
-    `}
-
-</Markdown>
-
-### Layout
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-padding-horizontal | The horizontal padding of the toast. | 1rem |
-| --toastive-padding-vertical | The vertical padding of the toast. | 0.5rem |
-| --toastive-width | The width of the toast. | 350px |
-
-    `}
-
-</Markdown>
-
-### Close button
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-close-button-color | The color of the close button. | currentColor |
-| --toastive-close-button-size | The size of the close button. | 1rem |
-
-    `}
-
-</Markdown>
-
-### Progress bar
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-progress-height | The height of the progress bar. | 0.25rem |
-| --toastive-progress-color | The color of the progress bar. | currentColor |
-| --toastive-progress-opacity | The opacity of the progress bar. | 0.5 |
-
-    `}
-
-</Markdown>
-
-### Variants
-
-<Markdown>
-	{`
-| Property   | Description | Default |
-|------------|-------------|---------|
-| --toastive-info-content-color | The color of the toast content for the info variant. | #0973dc |
-| --toastive-info-background-color | The background color of the toast for the info variant. | #f0f8ff |
-| --toastive-info-border-color | The border color of the toast for the info variant. | #b0e2ff |
-| --toastive-error-content-color | The color of the toast content for the error variant. | #e60000 |
-| --toastive-error-background-color | The background color of the toast for the error variant. | #fff0f0 |
-| --toastive-error-border-color | The border color of the toast for the error variant. | #ffe0e1 |
-| --toastive-warning-content-color | The color of the toast content for the warning variant. | #dc7609 |
-| --toastive-warning-background-color | The background color of the toast for the warning variant. | #fffcf0 |
-| --toastive-warning-border-color | The border color of the toast for the warning variant. | #fdf5d3 |
-| --toastive-success-content-color | The color of the toast content for the success variant. | #008a2e |
-| --toastive-success-background-color | The background color of the toast for the success variant. | #ecfdf3 |
-| --toastive-success-border-color | The border color of the toast for the success variant. | #d3fde5 |
-
-    `}
-
-</Markdown>
-
-### Example
-
-```css
-:root {
-	--toastive-wrapper-horizontal-offset: 2rem;
-	--toastive-wrapper-vertical-offset: 2rem;
-	--toastive-wrapper-gap: 0.5rem;
-
-	--toastive-font-family: 'Arial', sans-serif;
-	--toastive-font-size: 1.2rem;
-
-	--toastive-content-color: #ccc;
-	--toastive-background-color: #333;
+export function SaveButton() {
+  return (
+    <button
+      onClick={() =>
+        showToastive({
+          message: 'Saved!',
+          variant: ToastiveVariant.Success
+        })
+      }
+    >
+      Save
+    </button>
+  )
 }
 ```
 
-## Playground
+> 💡 If you also render the element directly via `<mm-toastive>` in JSX, listen to its custom events with `addEventListener` inside `useEffect` — JSX-style props like `onToastiveClose` won't fire.
 
-All these properties and styles can be easily tested in our playground.
+### Vue 3
 
-[Open the playground](/story/documentation-toastive--playground)
+```vue
+<script setup lang="ts">
+import { showToastive, ToastiveVariant } from 'toastive'
+
+function onSave() {
+  showToastive({ message: 'Saved!', variant: ToastiveVariant.Success })
+}
+</script>
+
+<template>
+  <button @click="onSave">Save</button>
+</template>
+```
+
+### Angular 16+ (standalone components)
+
+```typescript
+import { Component } from '@angular/core'
+import { showToastive, ToastiveVariant } from 'toastive'
+
+@Component({
+  selector: 'app-save',
+  standalone: true,
+  template: `<button (click)="onSave()">Save</button>`
+})
+export class SaveComponent {
+  onSave() {
+    showToastive({ message: 'Saved!', variant: ToastiveVariant.Success })
+  }
+}
+```
+
+### Svelte 5
+
+```svelte
+<script lang="ts">
+  import { showToastive, ToastiveVariant } from 'toastive'
+
+  function onSave() {
+    showToastive({ message: 'Saved!', variant: ToastiveVariant.Success })
+  }
+</script>
+
+<button onclick={onSave}>Save</button>
+```
+
+> 💡 Don't forget to add `toastive` to your bundler's `ssr.noExternal` / `external` config so the import is replaced by the client runtime on the server pass.
+
+<br />
+
+## 🎨 Customization
+
+Every visual property is a CSS custom property. Override them on `:root` or any ancestor — values cascade into each toast's open Shadow DOM.
+
+### Color palette
+
+<ColorPalette>
+  <ColorItem
+    name="Default & Loading"
+    subtitle="Default / Loading color palette"
+    colors={{ Background: '#fff', Border: '#ededed', Content: '#333' }}
+  />
+  <ColorItem
+    name="Info"
+    subtitle="Info color palette"
+    colors={{ Background: '#f0f8ff', Border: '#d3e0fd', Content: '#0973dc' }}
+  />
+  <ColorItem
+    name="Success"
+    subtitle="Success color palette"
+    colors={{ Background: '#ecfdf3', Border: '#d3fde5', Content: '#008a2e' }}
+  />
+  <ColorItem
+    name="Warning"
+    subtitle="Warning color palette"
+    colors={{ Background: '#fffcf0', Border: '#fdf5d3', Content: '#dc7609' }}
+  />
+  <ColorItem
+    name="Error"
+    subtitle="Error color palette"
+    colors={{ Background: '#fff0f0', Border: '#ffe0e1', Content: '#e60000' }}
+  />
+</ColorPalette>
+
+The dark theme overrides are baked into the component when `theme="dark"` is set — they light up `#eaeaea` content on `#1a1a1a` background with per-variant accents.
+
+### CSS variables
+
+**Wrapper (corner offsets & stacking):**
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--toastive-wrapper-horizontal-offset</code>
+      </td>
+      <td>Horizontal offset of the wrapper.</td>
+      <td>
+        <code>1rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-wrapper-vertical-offset</code>
+      </td>
+      <td>Vertical offset of the wrapper.</td>
+      <td>
+        <code>1rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-wrapper-gap</code>
+      </td>
+      <td>Gap between stacked toasts.</td>
+      <td>
+        <code>1rem</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Typography & layout:**
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--toastive-font-family</code>
+      </td>
+      <td>Font family.</td>
+      <td>
+        <code>inherit</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-font-size</code>
+      </td>
+      <td>Font size.</td>
+      <td>
+        <code>0.8rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-width</code>
+      </td>
+      <td>Width of the toast.</td>
+      <td>
+        <code>350px</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-padding-horizontal</code>
+      </td>
+      <td>Horizontal padding.</td>
+      <td>
+        <code>1rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-padding-vertical</code>
+      </td>
+      <td>Vertical padding.</td>
+      <td>
+        <code>0.5rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-actions-gap</code>
+      </td>
+      <td>Gap between action buttons.</td>
+      <td>
+        <code>0.25rem</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Surface (colors, border, shadow):**
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--toastive-background-color</code>
+      </td>
+      <td>Background.</td>
+      <td>
+        <code>#fff</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-content-color</code>
+      </td>
+      <td>Text color.</td>
+      <td>
+        <code>#333</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-border-color</code>
+      </td>
+      <td>Border color.</td>
+      <td>
+        <code>#ededed</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-border-width</code>
+      </td>
+      <td>Border width.</td>
+      <td>
+        <code>1px</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-border-radius</code>
+      </td>
+      <td>Border radius.</td>
+      <td>
+        <code>0.25rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-box-shadow</code>
+      </td>
+      <td>Box shadow.</td>
+      <td>
+        <code>0 4px 12px rgba(0, 0, 0, 0.1)</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Per-variant color overrides:**
+
+Each variant exposes `background`, `border`, `content` colors. The pattern is `--toastive-{variant}-{slot}-color`.
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--toastive-info-content-color</code>
+      </td>
+      <td>Info text color.</td>
+      <td>
+        <code>#0973dc</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-info-background-color</code>
+      </td>
+      <td>Info background.</td>
+      <td>
+        <code>#f0f8ff</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-info-border-color</code>
+      </td>
+      <td>Info border.</td>
+      <td>
+        <code>#d3e0fd</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-success-content-color</code>
+      </td>
+      <td>Success text color.</td>
+      <td>
+        <code>#008a2e</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-success-background-color</code>
+      </td>
+      <td>Success background.</td>
+      <td>
+        <code>#ecfdf3</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-success-border-color</code>
+      </td>
+      <td>Success border.</td>
+      <td>
+        <code>#d3fde5</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-warning-content-color</code>
+      </td>
+      <td>Warning text color.</td>
+      <td>
+        <code>#dc7609</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-warning-background-color</code>
+      </td>
+      <td>Warning background.</td>
+      <td>
+        <code>#fffcf0</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-warning-border-color</code>
+      </td>
+      <td>Warning border.</td>
+      <td>
+        <code>#fdf5d3</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-error-content-color</code>
+      </td>
+      <td>Error text color.</td>
+      <td>
+        <code>#e60000</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-error-background-color</code>
+      </td>
+      <td>Error background.</td>
+      <td>
+        <code>#fff0f0</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-error-border-color</code>
+      </td>
+      <td>Error border.</td>
+      <td>
+        <code>#ffe0e1</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Progress bar, close & action buttons:**
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>--toastive-progress-color</code>
+      </td>
+      <td>Progress bar color.</td>
+      <td>
+        <code>currentColor</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-progress-height</code>
+      </td>
+      <td>Progress bar height.</td>
+      <td>
+        <code>0.25rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-progress-opacity</code>
+      </td>
+      <td>Progress bar opacity.</td>
+      <td>
+        <code>0.5</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-close-button-color</code>
+      </td>
+      <td>Close button color.</td>
+      <td>
+        <code>currentColor</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-close-button-size</code>
+      </td>
+      <td>Close button size.</td>
+      <td>
+        <code>1rem</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-action-color</code>
+      </td>
+      <td>Action text color.</td>
+      <td>
+        <code>currentColor</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-action-background-color</code>
+      </td>
+      <td>Action background.</td>
+      <td>
+        <code>none</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-action-border-color</code>
+      </td>
+      <td>Action border.</td>
+      <td>
+        <code>currentColor</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-action-border-width</code>
+      </td>
+      <td>Action border width.</td>
+      <td>
+        <code>1px</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>--toastive-action-border-radius</code>
+      </td>
+      <td>Action border radius.</td>
+      <td>
+        <code>0.25rem</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Example — override accent colors
+
+```css
+:root {
+  --toastive-success-content-color: #0c8a4f;
+  --toastive-success-background-color: #e8fbf0;
+  --toastive-success-border-color: #c4f0d6;
+
+  --toastive-error-content-color: #c0392b;
+  --toastive-error-background-color: #fff4f2;
+  --toastive-error-border-color: #f7d3cc;
+}
+```
+
+<br />
+
+## 📚 API reference
+
+### `showToastive(props?)`
+
+Returns a `ToastiveInstance` with `update()` and `close()` methods.
+
+<table className="doc-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>action</code>
+      </td>
+      <td>
+        Secondary action button (<code>label</code>, <code>onClick</code>, optional{' '}
+        <code>closeOnClick: true</code>).
+      </td>
+      <td>
+        <code>ToastiveAction</code>
+      </td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>
+        <code>autoClose</code>
+      </td>
+      <td>
+        Auto close after <code>duration</code>.
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>closeButton</code>
+      </td>
+      <td>Show the close button.</td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>customIcon</code>
+      </td>
+      <td>HTML string for the icon slot default content.</td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>
+        <code>draggable</code>
+      </td>
+      <td>Allow dismissing by dragging.</td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>duration</code>
+      </td>
+      <td>Milliseconds before auto-close.</td>
+      <td>
+        <code>number</code>
+      </td>
+      <td>
+        <code>5000</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>message</code>
+      </td>
+      <td>Message body.</td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>''</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>pauseOnHover</code>
+      </td>
+      <td>Pause timer on hover/focus.</td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>position</code>
+      </td>
+      <td>Corner of the screen.</td>
+      <td>
+        <code>ToastivePosition</code>
+      </td>
+      <td>
+        <code>'bottom-right'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>theme</code>
+      </td>
+      <td>Color theme.</td>
+      <td>
+        <code>ToastiveTheme</code>
+      </td>
+      <td>
+        <code>'light'</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>title</code>
+      </td>
+      <td>Title.</td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>''</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>variant</code>
+      </td>
+      <td>Color variant.</td>
+      <td>
+        <code>ToastiveVariant</code>
+      </td>
+      <td>
+        <code>'default'</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### `setDefaults(props)`
+
+Merge defaults applied to every subsequent `showToastive()` call. Adds `maxVisible` — a per-position cap (oldest closed first).
+
+```javascript
+setDefaults({ maxVisible: 5, position: ToastivePosition.TopRight })
+```
+
+### `resetDefaults()`
+
+Reset every default set by `setDefaults()` back to the package built-ins. Useful for tests or for cleaning up at runtime.
+
+```javascript
+setDefaults({ theme: ToastiveTheme.Dark })
+// ...
+resetDefaults() // back to built-ins
+```
+
+### `clearToasts(position?)`
+
+Remove all toasts, or only the toasts in the given `ToastivePosition`.
+
+```javascript
+clearToasts() // everything
+clearToasts(ToastivePosition.TopRight) // scoped
+```
+
+### `MmToastive` element
+
+The underlying Web Component. You only need it if you want full markup control — otherwise `showToastive()` covers everything.
+
+```html
+<mm-toastive variant="success" auto-close position="bottom-right">
+  <span slot="icon">⭐</span>
+  <span slot="title">Saved</span>
+  <span slot="message">Your changes have been stored.</span>
+</mm-toastive>
+```
+
+It exposes the same properties as `showToastive()` plus `close()` and `update()` on the element instance.
+
+<br />

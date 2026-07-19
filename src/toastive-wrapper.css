@@ -1,57 +1,71 @@
-mm-toastive-wrapper {
-	--gap: var(--toastive-wrapper-gap, 1rem);
-	--vertical-offset: var(--toastive-wrapper-vertical-offset, 1rem);
-	--horizontal-offset: var(--toastive-wrapper-horizontal-offset, 1rem);
+:host {
+  --gap: var(--toastive-wrapper-gap, 1rem);
+  --vertical-offset: var(--toastive-wrapper-vertical-offset, 1rem);
+  --horizontal-offset: var(--toastive-wrapper-horizontal-offset, 1rem);
 
-	align-items: center;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	gap: var(--gap);
-	height: fit-content;
-	padding: 0;
-	pointer-events: none;
-	position: fixed;
-	transition: max-height 0.3s ease-in-out;
-	width: fit-content;
-	z-index: 9999;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  height: fit-content;
+  padding: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: max-height 0.3s ease-in-out;
+  width: fit-content;
+  z-index: 9999;
 }
 
-mm-toastive-wrapper.top-left {
-	justify-content: flex-start;
-	left: var(--horizontal-offset);
-	top: var(--vertical-offset);
+:host(.top-center) {
+  justify-content: flex-start;
+  left: 50%;
+  top: var(--vertical-offset);
+  transform: translateX(-50%);
 }
 
-mm-toastive-wrapper.top-right {
-	justify-content: flex-start;
-	right: var(--horizontal-offset);
-	top: var(--vertical-offset);
+:host(.top-left) {
+  justify-content: flex-start;
+  left: var(--horizontal-offset);
+  top: var(--vertical-offset);
 }
 
-mm-toastive-wrapper.bottom-left {
-	bottom: var(--vertical-offset);
-	justify-content: flex-end;
-	left: var(--horizontal-offset);
+:host(.top-right) {
+  justify-content: flex-start;
+  right: var(--horizontal-offset);
+  top: var(--vertical-offset);
 }
 
-mm-toastive-wrapper.bottom-right {
-	bottom: var(--vertical-offset);
-	justify-content: flex-end;
-	right: var(--horizontal-offset);
+:host(.bottom-center) {
+  bottom: var(--vertical-offset);
+  justify-content: flex-end;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+:host(.bottom-left) {
+  bottom: var(--vertical-offset);
+  justify-content: flex-end;
+  left: var(--horizontal-offset);
+}
+
+:host(.bottom-right) {
+  bottom: var(--vertical-offset);
+  justify-content: flex-end;
+  right: var(--horizontal-offset);
 }
 
 @media (max-width: 576px) {
-	mm-toastive-wrapper {
-		padding: 0 var(--horizontal-offset);
-		width: 100%;
-	}
+  :host {
+    padding: 0 var(--horizontal-offset);
+    width: 100%;
+  }
 
-	mm-toastive-wrapper.top-left,
-	mm-toastive-wrapper.top-right,
-	mm-toastive-wrapper.bottom-left,
-	mm-toastive-wrapper.bottom-right {
-		left: 0;
-		right: 0;
-	}
+  :host(.top-left),
+  :host(.top-right),
+  :host(.bottom-left),
+  :host(.bottom-right) {
+    left: 0;
+    right: 0;
+  }
 }

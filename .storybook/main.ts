@@ -3,10 +3,9 @@ import type { StorybookConfig } from "@storybook/web-components-vite";
 const config: StorybookConfig = {
   stories: ["../__docs__/**/*.docs.mdx", "../__docs__/**/*.stories.ts"],
   addons: [
+    "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@ljcl/storybook-addon-cssprops",
-    "@storybook/addon-essentials",
-    "@storybook/blocks",
+    "@ljcl/storybook-addon-cssprops"
   ],
   core: {
     builder: "@storybook/builder-vite",
