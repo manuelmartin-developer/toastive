@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <br /><br />
 
+## [1.2.1] - 2026-07-23
+
+### Fixed
+
+- Enhance drag-to-dismiss behavior to avoid accidental text selection while dragging.
+
 ## [1.2.0] - 2026-07-16
 
 ### Added
@@ -23,8 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Drag to dismiss is now vertical (top → up, bottom → down), implemented with the Web Animations API for smooth handoff from the drag position.
 - Entry/exit transitions use the FLIP technique so existing toasts glide into their new slots instead of jumping.
-
-<br /><br />
 
 ## [1.1.0] - 2025-01-28
 

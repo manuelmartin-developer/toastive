@@ -83,6 +83,7 @@ slot[name='icon'] {
   overflow: hidden;
   padding: var(--padding-vertical) var(--padding-horizontal);
   position: relative;
+  touch-action: none;
   transition:
     background 0.3s ease-in-out,
     border-color 0.3s ease-in-out,
@@ -93,6 +94,12 @@ slot[name='icon'] {
 
 .toastive:has(slot[name='icon']:not([hidden])) {
   padding-left: 3rem;
+}
+
+:host([data-swiped]) .toastive,
+:host([data-swiped]) .toastive * {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .toastive__content {
