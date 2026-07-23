@@ -33,11 +33,17 @@ export default class MmToastive extends HTMLElement {
 
   #closeSlideTimer?: ReturnType<typeof setTimeout>
 
-  #dragEndHandler: ((event: MouseEvent | TouchEvent) => void) | null = null
+  #dragStartTime = 0
 
-  #dragMoveHandler: ((event: MouseEvent | TouchEvent) => void) | null = null
+  #dragStartX = 0
+
+  #dragStartY = 0
 
   #isPaused = false
+
+  #pointerId: number | null = null
+
+  #swipeDirection: 'x' | 'y' | null = null
 
   #keydownHandler?: (event: KeyboardEvent) => void
 
@@ -327,19 +333,6 @@ export default class MmToastive extends HTMLElement {
     })
   }
 
-  #removeDragListeners(): void {
-    if (this.#dragMoveHandler) {
-      document.removeEventListener('mousemove', this.#dragMoveHandler)
-      document.removeEventListener('touchmove', this.#dragMoveHandler)
-      this.#dragMoveHandler = null
-    }
-    if (this.#dragEndHandler) {
-      document.removeEventListener('mouseup', this.#dragEndHandler)
-      document.removeEventListener('touchend', this.#dragEndHandler)
-      this.#dragEndHandler = null
-    }
-  }
-
   #removePauseHoverListeners(): void {
     if (this.#pauseEnterHandler) {
       this.removeEventListener('mouseenter', this.#pauseEnterHandler)
@@ -385,95 +378,157 @@ export default class MmToastive extends HTMLElement {
   }
 
   #slideToClose = (): void => {
-    const handleMove = (event: MouseEvent | TouchEvent) => {
+    const SWIPE_THRESHOLD = 45
+    const VELOCITY_THRESHOLD = 0.11
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.button === 2) return
+      if (this.dataset.closing !== undefined) return
+
+      const target = event.target as HTMLElement | null
+      if (target?.tagName === 'BUTTON') return
+
+      if ((window.getSelection()?.toString().length ?? 0) > 0) return
+
+      try {
+        this.setPointerCapture(event.pointerId)
+      } catch {
+        return
+      }
+
+      this.#pointerId = event.pointerId
+      this.#dragStartTime = performance.now()
+      this.#dragStartX = event.clientX
+      this.#dragStartY = event.clientY
+      this.#swipeDirection = null
+    }
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (this.#pointerId !== event.pointerId) return
+
+      if ((window.getSelection()?.toString().length ?? 0) > 0) {
+        this.#endDrag()
+        return
+      }
+
+      const xDelta = event.clientX - this.#dragStartX
+      const yDelta = event.clientY - this.#dragStartY
+
+      if (!this.#swipeDirection && (Math.abs(xDelta) > 1 || Math.abs(yDelta) > 1)) {
+        this.#swipeDirection = Math.abs(xDelta) > Math.abs(yDelta) ? 'x' : 'y'
+        this.setAttribute('data-swiped', '')
+      }
+
+      if (!this.#swipeDirection) return
+
       const isAtTop = [
         ToastivePosition.TopRight,
         ToastivePosition.TopLeft,
         ToastivePosition.TopCenter
       ].includes(this.position)
 
-      const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY
+      let translateY = 0
 
-      const initialY = clientY
+      if (this.#swipeDirection === 'y') {
+        const dampening = (delta: number) => delta * (1 / (1.5 + Math.abs(delta) / 20))
 
-      this.#dragMoveHandler = (moveEvent: MouseEvent | TouchEvent) => {
-        const currentY =
-          moveEvent instanceof MouseEvent ? moveEvent.clientY : moveEvent.touches[0].clientY
-        const diffY = currentY - initialY
-
-        // Only follow the drag in the natural direction of the toast:
-        // top toasts drag up, bottom toasts drag down. Reverse direction is
-        // ignored so the toast never opens the wrong way.
-        if ((isAtTop && diffY < 0) || (!isAtTop && diffY > 0)) {
-          this.style.transform = `translateY(${diffY}px)`
-        }
-      }
-
-      this.#dragEndHandler = (endEvent: MouseEvent | TouchEvent) => {
-        this.#removeDragListeners()
-
-        const currentY =
-          endEvent instanceof MouseEvent ? endEvent.clientY : endEvent.changedTouches[0].clientY
-        const diffY = currentY - initialY
-        const threshold = 50
-
-        // Capture the current inline transform so the Web Animation can pick
-        // up from exactly where the user left the toast (avoids snap-back).
-        const startTransform = this.style.transform || 'translateY(0)'
-
-        if ((isAtTop && diffY < -threshold) || (!isAtTop && diffY > threshold)) {
-          // Close: animate from drag position to off-screen in the natural
-          // direction. Web Animations API overrides the inline transform
-          // during the run, so we DON'T clear it beforehand — that would
-          // cause a snap to translateY(0) at t=0.
-          this.dataset.closing = ''
-
-          if (!prefersReducedMotion()) {
-            this.animate(
-              [
-                { transform: startTransform, opacity: 1 },
-                {
-                  transform: isAtTop ? 'translateY(-100%)' : 'translateY(100%)',
-                  opacity: 0
-                }
-              ],
-              { duration: 300, easing: 'ease-in-out', fill: 'forwards' }
-            ).onfinish = () => this.#handleClose()
-          } else {
-            this.#handleClose()
-          }
+        if (isAtTop) {
+          translateY = yDelta < 0 ? yDelta : dampening(yDelta)
         } else {
-          if (!prefersReducedMotion()) {
-            // Snap back to original position. Same trick: animate from drag
-            // position to translateY(0). When the animation finishes we clear
-            // the inline transform so subsequent drags start clean.
-            this.animate([{ transform: startTransform }, { transform: 'translateY(0)' }], {
-              duration: 200,
-              easing: 'ease-out'
-            }).onfinish = () => {
-              this.style.transform = ''
-            }
-          } else {
-            this.style.transform = ''
-          }
+          translateY = yDelta > 0 ? yDelta : dampening(yDelta)
         }
       }
 
-      document.addEventListener('mousemove', this.#dragMoveHandler)
-      document.addEventListener('mouseup', this.#dragEndHandler)
-      document.addEventListener('touchmove', this.#dragMoveHandler)
-      document.addEventListener('touchend', this.#dragEndHandler)
+      this.style.transform = `translateY(${translateY}px)`
     }
 
-    this.addEventListener('mousedown', handleMove)
-    this.addEventListener('touchstart', handleMove, { passive: true })
+    const handlePointerUp = (event: PointerEvent) => {
+      if (this.#pointerId !== event.pointerId) return
+
+      const isAtTop = [
+        ToastivePosition.TopRight,
+        ToastivePosition.TopLeft,
+        ToastivePosition.TopCenter
+      ].includes(this.position)
+
+      const yDelta = event.clientY - this.#dragStartY
+      const timeTaken = Math.max(1, performance.now() - this.#dragStartTime)
+      const velocity = Math.abs(yDelta) / timeTaken
+
+      const startTransform = this.style.transform || 'translateY(0)'
+
+      const shouldDismiss =
+        !!this.#swipeDirection &&
+        ((isAtTop && (yDelta < -SWIPE_THRESHOLD || velocity > VELOCITY_THRESHOLD)) ||
+          (!isAtTop && (yDelta > SWIPE_THRESHOLD || velocity > VELOCITY_THRESHOLD)))
+
+      if (shouldDismiss) {
+        this.dataset.closing = ''
+
+        if (!prefersReducedMotion()) {
+          this.animate(
+            [
+              { transform: startTransform, opacity: 1 },
+              {
+                transform: isAtTop ? 'translateY(-100%)' : 'translateY(100%)',
+                opacity: 0
+              }
+            ],
+            { duration: 300, easing: 'ease-in-out', fill: 'forwards' }
+          ).onfinish = () => this.#handleClose()
+        } else {
+          this.#handleClose()
+        }
+      } else {
+        this.#snapBack(startTransform)
+      }
+
+      this.#endDrag()
+    }
+
+    const handlePointerCancel = (event: PointerEvent) => {
+      if (this.#pointerId !== event.pointerId) return
+      this.#snapBack(this.style.transform || 'translateY(0)')
+      this.#endDrag()
+    }
+
+    this.addEventListener('pointerdown', handlePointerDown)
+    this.addEventListener('pointermove', handlePointerMove)
+    this.addEventListener('pointerup', handlePointerUp)
+    this.addEventListener('pointercancel', handlePointerCancel)
+  }
+
+  #snapBack(startTransform: string): void {
+    if (!prefersReducedMotion()) {
+      this.animate([{ transform: startTransform }, { transform: 'translateY(0)' }], {
+        duration: 200,
+        easing: 'ease-out'
+      }).onfinish = () => {
+        this.style.transform = ''
+      }
+    } else {
+      this.style.transform = ''
+    }
+  }
+
+  #endDrag = (): void => {
+    if (this.#pointerId !== null) {
+      try {
+        this.releasePointerCapture(this.#pointerId)
+      } catch {
+        // pointer no longer captured (e.g. element already disconnected)
+      }
+      this.#pointerId = null
+    }
+    this.#swipeDirection = null
+    this.removeAttribute('data-swiped')
   }
 
   #teardown(): void {
     if (this.#timer) clearTimeout(this.#timer)
     if (this.#closeSlideTimer) clearTimeout(this.#closeSlideTimer)
 
-    this.#removeDragListeners()
+    this.#endDrag()
     this.#removePauseHoverListeners()
 
     if (this.#keydownHandler) {
