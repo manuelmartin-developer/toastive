@@ -1,4 +1,4 @@
-import{i as e}from"./preload-helper-BdFrVu1K.js";import{F as t,I as n,c as r,i,l as a,r as o,u as s}from"./blocks-DJxYZTLy.js";import{t as c}from"./mdx-react-shim-DEaU8thp.js";import{actionButton as l,clearingToasts as u,customIcon as d,globalDefaults as f,maxVisible as p,n as m,pauseOnHover as h,positions as g,quickStart as _,t as v,themes as y,updateInPlace as b,variants as x}from"./toastive.stories-CfBnwtT5.js";function S(e){let n={blockquote:`blockquote`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,strong:`strong`,ul:`ul`,...t(),...e.components};return(0,w.jsxs)(w.Fragment,{children:[(0,w.jsx)(r,{of:m}),`
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{F as t,I as n,P as r,c as i,i as a,l as o,r as s,u as c}from"./blocks-haE2RtDj.js";import{a as l,c as u,d,f,i as p,l as m,n as h,o as g,p as _,r as v,s as y,t as b,u as x}from"./toastive.stories-CYkvr5KY.js";function S(e){let n={blockquote:`blockquote`,code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,li:`li`,p:`p`,pre:`pre`,strong:`strong`,ul:`ul`,...t(),...e.components};return(0,w.jsxs)(w.Fragment,{children:[(0,w.jsx)(i,{of:d}),`
 `,(0,w.jsx)(n.h1,{id:`toastive`,children:`Toastive`}),`
 `,(0,w.jsxs)(n.p,{children:[`A lightweight, accessible, fully customizable web component library for toast notifications — drop-in for `,(0,w.jsx)(n.strong,{children:`any`}),` frontend stack.`]}),`
 `,(0,w.jsxs)(n.ul,{children:[`
@@ -32,17 +32,17 @@ showToastive({
 })
 `})}),`
 `,(0,w.jsx)(n.p,{children:`That's it — the toast appears, auto-closes after 5 s, and is fully accessible.`}),`
-`,(0,w.jsx)(a,{of:_}),`
+`,(0,w.jsx)(o,{of:m}),`
 `,(0,w.jsx)(`br`,{}),`
 `,(0,w.jsx)(n.h2,{id:`-variants`,children:`🧬 Variants`}),`
 `,(0,w.jsx)(n.p,{children:`Six built-in variants. Each one picks its own ARIA role:`}),`
 `,(0,w.jsxs)(`table`,{className:`doc-table`,children:[(0,w.jsx)(`thead`,{children:(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`th`,{children:`Variant`}),(0,w.jsx)(`th`,{children:`Role`}),(0,w.jsx)(`th`,{children:`aria-live`}),(0,w.jsx)(`th`,{children:`When to use`})]})}),(0,w.jsxs)(`tbody`,{children:[(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`default`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`status`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`polite`})}),(0,w.jsx)(`td`,{children:`Generic messages`})]}),(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`success`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`status`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`polite`})}),(0,w.jsx)(`td`,{children:`Successful actions`})]}),(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`info`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`status`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`polite`})}),(0,w.jsx)(`td`,{children:`Tips, neutral info`})]}),(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`loading`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`status`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`polite`})}),(0,w.jsx)(`td`,{children:`Async work in progress`})]}),(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`warning`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`alert`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`assertive`})}),(0,w.jsx)(`td`,{children:`Warnings, recoverable errors`})]}),(0,w.jsxs)(`tr`,{children:[(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`error`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`alert`})}),(0,w.jsx)(`td`,{children:(0,w.jsx)(`code`,{children:`assertive`})}),(0,w.jsx)(`td`,{children:`Failures, must-read errors`})]})]})]}),`
 `,(0,w.jsxs)(n.p,{children:[`Error & warning use `,(0,w.jsx)(n.code,{children:`alert`}),` so screen readers announce them immediately.`]}),`
-`,(0,w.jsx)(a,{of:x}),`
+`,(0,w.jsx)(o,{of:_}),`
 `,(0,w.jsx)(`br`,{}),`
 `,(0,w.jsx)(n.h2,{id:`-positions`,children:`📍 Positions`}),`
 `,(0,w.jsx)(n.p,{children:`Six positions — toasts in different positions stack independently.`}),`
-`,(0,w.jsx)(a,{of:g}),`
+`,(0,w.jsx)(o,{of:u}),`
 `,(0,w.jsx)(`br`,{}),`
 `,(0,w.jsx)(n.h2,{id:`-theming`,children:`🌓 Theming`}),`
 `,(0,w.jsxs)(n.p,{children:[`Each toast accepts `,(0,w.jsx)(n.code,{children:`theme: ToastiveTheme.Light | ToastiveTheme.Dark`}),`. The theme is `,(0,w.jsx)(n.strong,{children:`per toast`}),` (it does not auto-detect from the OS), so you stay in full control. A global default can be set with `,(0,w.jsx)(n.code,{children:`setDefaults({ theme: ToastiveTheme.Dark })`}),`.`]}),`
@@ -53,12 +53,12 @@ showToastive({
   theme: ToastiveTheme.Dark
 })
 `})}),`
-`,(0,w.jsx)(a,{of:y}),`
+`,(0,w.jsx)(o,{of:x}),`
 `,(0,w.jsx)(`br`,{}),`
 `,(0,w.jsx)(n.h2,{id:`-behaviors`,children:`⏱ Behaviors`}),`
 `,(0,w.jsx)(n.h3,{id:`auto-close--pause-on-hover`,children:`Auto-close & pause on hover`}),`
 `,(0,w.jsxs)(n.p,{children:[`By default the toast auto-closes after `,(0,w.jsx)(n.code,{children:`duration`}),` (5 s). Hover or focus the toast to `,(0,w.jsx)(n.strong,{children:`pause`}),` both the timer and the progress bar; move away to resume.`]}),`
-`,(0,w.jsx)(a,{of:h}),`
+`,(0,w.jsx)(o,{of:y}),`
 `,(0,w.jsx)(n.p,{children:`Disable per toast:`}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`showToastive({
   message: 'Strict timer',
@@ -72,7 +72,7 @@ showToastive({
 `,(0,w.jsxs)(n.p,{children:[`Disable per toast with `,(0,w.jsx)(n.code,{children:`draggable: false`}),`.`]}),`
 `,(0,w.jsxs)(n.h3,{id:`cap-per-corner-maxvisible`,children:[`Cap per corner (`,(0,w.jsx)(n.code,{children:`maxVisible`}),`)`]}),`
 `,(0,w.jsxs)(n.p,{children:[`Limit active toasts per position. When the cap is reached, the `,(0,w.jsx)(n.strong,{children:`oldest`}),` toast is closed (FIFO) before the new one is added.`]}),`
-`,(0,w.jsx)(a,{of:p}),`
+`,(0,w.jsx)(o,{of:g}),`
 `,(0,w.jsx)(n.p,{children:`Globally:`}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`import { setDefaults } from 'toastive'
 
@@ -95,7 +95,7 @@ setDefaults({ maxVisible: 5 }) // each corner holds at most 5 toasts
   }
 })
 `})}),`
-`,(0,w.jsx)(a,{of:l}),`
+`,(0,w.jsx)(o,{of:b}),`
 `,(0,w.jsx)(n.h3,{id:`update-a-live-toast--loading--success`,children:`Update a live toast — loading → success`}),`
 `,(0,w.jsxs)(n.p,{children:[(0,w.jsx)(n.code,{children:`showToastive()`}),` returns an instance with `,(0,w.jsx)(n.code,{children:`update()`}),` and `,(0,w.jsx)(n.code,{children:`close()`}),`. The DOM diffs in place — no re-creation, no animation restart (except `,(0,w.jsx)(n.code,{children:`duration`}),`, which restarts the progress bar).`]}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`const toast = showToastive({
@@ -114,7 +114,7 @@ toast.update({
   autoClose: true
 })
 `})}),`
-`,(0,w.jsx)(a,{of:b}),`
+`,(0,w.jsx)(o,{of:f}),`
 `,(0,w.jsx)(n.h3,{id:`global-defaults`,children:`Global defaults`}),`
 `,(0,w.jsxs)(n.p,{children:[`Use `,(0,w.jsx)(n.code,{children:`setDefaults()`}),` to apply options to every subsequent `,(0,w.jsx)(n.code,{children:`showToastive()`}),` call. Defaults are `,(0,w.jsx)(n.strong,{children:`merged`}),`, not replaced — pass only the fields you want to change.`]}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`import { setDefaults, ToastivePosition, ToastiveTheme } from 'toastive'
@@ -125,7 +125,7 @@ setDefaults({
   theme: ToastiveTheme.Dark
 })
 `})}),`
-`,(0,w.jsx)(a,{of:f}),`
+`,(0,w.jsx)(o,{of:p}),`
 `,(0,w.jsx)(n.h3,{id:`clearing-toasts`,children:`Clearing toasts`}),`
 `,(0,w.jsxs)(n.p,{children:[`Use `,(0,w.jsx)(n.code,{children:`clearToasts()`}),` to remove active toasts. Pass a position to scope the clear; omit to remove everything.`]}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`import { clearToasts, ToastivePosition } from 'toastive'
@@ -133,7 +133,7 @@ setDefaults({
 clearToasts() // remove every toast
 clearToasts(ToastivePosition.TopRight) // only top-right corner
 `})}),`
-`,(0,w.jsx)(a,{of:u}),`
+`,(0,w.jsx)(o,{of:h}),`
 `,(0,w.jsx)(n.h3,{id:`custom-icons`,children:`Custom icons`}),`
 `,(0,w.jsxs)(n.p,{children:[`Pass an HTML string via `,(0,w.jsx)(n.code,{children:`customIcon`}),` to override the default per-variant icon.`]}),`
 `,(0,w.jsx)(n.pre,{children:(0,w.jsx)(n.code,{className:`language-javascript`,children:`showToastive({
@@ -141,7 +141,7 @@ clearToasts(ToastivePosition.TopRight) // only top-right corner
   customIcon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>'
 })
 `})}),`
-`,(0,w.jsx)(a,{of:d}),`
+`,(0,w.jsx)(o,{of:v}),`
 `,(0,w.jsx)(`br`,{}),`
 `,(0,w.jsx)(n.h2,{id:`-accessibility`,children:`♿ Accessibility`}),`
 `,(0,w.jsx)(n.p,{children:`Toastive is accessible by default — no configuration required:`}),`
@@ -231,7 +231,7 @@ export class SaveComponent {
 `,(0,w.jsx)(n.h2,{id:`-customization`,children:`🎨 Customization`}),`
 `,(0,w.jsxs)(n.p,{children:[`Every visual property is a CSS custom property. Override them on `,(0,w.jsx)(n.code,{children:`:root`}),` or any ancestor — values cascade into each toast's open Shadow DOM.`]}),`
 `,(0,w.jsx)(n.h3,{id:`color-palette`,children:`Color palette`}),`
-`,(0,w.jsxs)(i,{children:[(0,w.jsx)(o,{name:`Default & Loading`,subtitle:`Default / Loading color palette`,colors:{Background:`#fff`,Border:`#ededed`,Content:`#333`}}),(0,w.jsx)(o,{name:`Info`,subtitle:`Info color palette`,colors:{Background:`#f0f8ff`,Border:`#d3e0fd`,Content:`#0973dc`}}),(0,w.jsx)(o,{name:`Success`,subtitle:`Success color palette`,colors:{Background:`#ecfdf3`,Border:`#d3fde5`,Content:`#008a2e`}}),(0,w.jsx)(o,{name:`Warning`,subtitle:`Warning color palette`,colors:{Background:`#fffcf0`,Border:`#fdf5d3`,Content:`#dc7609`}}),(0,w.jsx)(o,{name:`Error`,subtitle:`Error color palette`,colors:{Background:`#fff0f0`,Border:`#ffe0e1`,Content:`#e60000`}})]}),`
+`,(0,w.jsxs)(a,{children:[(0,w.jsx)(s,{name:`Default & Loading`,subtitle:`Default / Loading color palette`,colors:{Background:`#fff`,Border:`#ededed`,Content:`#333`}}),(0,w.jsx)(s,{name:`Info`,subtitle:`Info color palette`,colors:{Background:`#f0f8ff`,Border:`#d3e0fd`,Content:`#0973dc`}}),(0,w.jsx)(s,{name:`Success`,subtitle:`Success color palette`,colors:{Background:`#ecfdf3`,Border:`#d3fde5`,Content:`#008a2e`}}),(0,w.jsx)(s,{name:`Warning`,subtitle:`Warning color palette`,colors:{Background:`#fffcf0`,Border:`#fdf5d3`,Content:`#dc7609`}}),(0,w.jsx)(s,{name:`Error`,subtitle:`Error color palette`,colors:{Background:`#fff0f0`,Border:`#ffe0e1`,Content:`#e60000`}})]}),`
 `,(0,w.jsxs)(n.p,{children:[`The dark theme overrides are baked into the component when `,(0,w.jsx)(n.code,{children:`theme="dark"`}),` is set — they light up `,(0,w.jsx)(n.code,{children:`#eaeaea`}),` content on `,(0,w.jsx)(n.code,{children:`#1a1a1a`}),` background with per-variant accents.`]}),`
 `,(0,w.jsx)(n.h3,{id:`css-variables`,children:`CSS variables`}),`
 `,(0,w.jsx)(n.p,{children:(0,w.jsx)(n.strong,{children:`Wrapper (corner offsets & stacking):`})}),`
@@ -286,4 +286,4 @@ clearToasts(ToastivePosition.TopRight) // scoped
 </mm-toastive>
 `})}),`
 `,(0,w.jsxs)(n.p,{children:[`It exposes the same properties as `,(0,w.jsx)(n.code,{children:`showToastive()`}),` plus `,(0,w.jsx)(n.code,{children:`close()`}),` and `,(0,w.jsx)(n.code,{children:`update()`}),` on the element instance.`]}),`
-`,(0,w.jsx)(`br`,{})]})}function C(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,w.jsx)(n,{...e,children:(0,w.jsx)(S,{...e})}):S(e)}var w;e((()=>{w=n(),c(),s(),v()}))();export{C as default};
+`,(0,w.jsx)(`br`,{})]})}function C(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,w.jsx)(n,{...e,children:(0,w.jsx)(S,{...e})}):S(e)}var w;function T(){return(T=e((()=>{w=n(),r(),c(),l()})))()}T();export{C as default};
