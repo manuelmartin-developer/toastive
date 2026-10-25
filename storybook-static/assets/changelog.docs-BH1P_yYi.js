@@ -1,4 +1,4 @@
-import{i as e}from"./preload-helper-BdFrVu1K.js";import{F as t,I as n,c as r,s as i,u as a}from"./blocks-DJxYZTLy.js";import{t as o}from"./mdx-react-shim-DEaU8thp.js";import{n as s,t as c}from"./changelog.stories-DY9Tt1oW.js";var l,u=e((()=>{l=`# Changelog
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{F as t,I as n,P as r,c as i,s as a,u as o}from"./blocks-haE2RtDj.js";import{n as s,t as c}from"./changelog.stories-BV5Mcok8.js";var l;function u(){return(u=e((()=>{l=`# Changelog
 
 <!-- All notable changes to this project will be documented in this file.
 
@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). -->
 
 <br /><br />
+
+## [1.2.1] - 2026-07-23
+
+### Fixed
+
+- Enhance drag-to-dismiss behavior to avoid accidental text selection while dragging.
 
 ## [1.2.0] - 2026-07-16
 
@@ -23,8 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Drag to dismiss is now vertical (top → up, bottom → down), implemented with the Web Animations API for smooth handoff from the drag position.
 - Entry/exit transitions use the FLIP technique so existing toasts glide into their new slots instead of jumping.
-
-<br /><br />
 
 ## [1.1.0] - 2025-01-28
 
@@ -57,5 +61,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial release
-`}));function d(e){return(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(r,{of:c}),`
-`,(0,p.jsx)(i,{children:l})]})}function f(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,p.jsx)(n,{...e,children:(0,p.jsx)(d,{...e})}):d(e)}var p;e((()=>{p=n(),o(),a(),u(),s()}))();export{f as default};
+`})))()}function d(e){return(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(i,{of:c}),`
+`,(0,p.jsx)(a,{children:l})]})}function f(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,p.jsx)(n,{...e,children:(0,p.jsx)(d,{...e})}):d(e)}var p;function m(){return(m=e((()=>{p=n(),r(),o(),u(),s()})))()}m();export{f as default};
