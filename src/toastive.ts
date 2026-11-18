@@ -385,8 +385,8 @@ export default class MmToastive extends HTMLElement {
       if (event.button === 2) return
       if (this.dataset.closing !== undefined) return
 
-      const target = event.target as HTMLElement | null
-      if (target?.tagName === 'BUTTON') return
+      const origin = event.composedPath()[0]
+      if (origin instanceof Element && origin.closest('button')) return
 
       if ((window.getSelection()?.toString().length ?? 0) > 0) return
 
