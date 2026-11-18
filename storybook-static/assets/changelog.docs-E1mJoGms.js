@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <br /><br />
 
+## [1.2.3] - 2026-11-18
+
+### Fixed
+
+- Close button clicks are no longer swallowed by drag-to-dismiss.
+
+## [1.2.2] - 2026-10-25
+
+### Fixed
+
+- Update dev dependencies to address security vulnerabilities.
+
+
 ## [1.2.1] - 2026-07-23
 
 ### Fixed

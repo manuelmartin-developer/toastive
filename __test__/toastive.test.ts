@@ -1,8 +1,16 @@
 // @vitest-environment jsdom
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 
 // jsdom doesn't ship Web Animations API. Stub `Element.animate()` so the
 // component's `connectedCallback()` can run without crashing in tests.
+if (typeof Element !== 'undefined' && !Element.prototype.setPointerCapture) {
+  Element.prototype.setPointerCapture = function () {}
+  Element.prototype.releasePointerCapture = function () {}
+  Element.prototype.hasPointerCapture = function () {
+    return false
+  }
+}
+
 if (typeof Element !== 'undefined' && !Element.prototype.animate) {
   Element.prototype.animate = function () {
     return {
@@ -106,5 +114,76 @@ describe('MmToastive — icon slot rendering', () => {
     if (!slot) return
     expect(hasSvgElement(slot)).toBe(true)
     expect(hasIconMarkupAsText(slot)).toBe(false)
+  })
+})
+
+const pointerDown = (target: EventTarget): void => {
+  target.dispatchEvent(
+    new PointerEvent('pointerdown', {
+      bubbles: true,
+      button: 0,
+      clientX: 10,
+      clientY: 10,
+      composed: true,
+      pointerId: 1
+    })
+  )
+}
+
+describe('MmToastive — close button', () => {
+  afterEach(cleanup)
+  afterAll(cleanup)
+
+  it('closes when the close button is clicked', () => {
+    const toast = makeToast({
+      title: 'Closable',
+      message: 'Click X',
+      closeButton: true,
+      autoClose: false,
+      position: ToastivePosition.BottomRight
+    })
+
+    const button = toast.shadowRoot?.querySelector('#toastive__close') as HTMLButtonElement | null
+    expect(button).toBeTruthy()
+    button?.click()
+
+    expect((toast as unknown as HTMLElement).dataset.closing).toBe('')
+  })
+
+  it('does not capture the pointer when the press starts on the close icon', () => {
+    const host = makeToast({
+      title: 'Closable',
+      message: 'Click X',
+      closeButton: true,
+      draggable: true,
+      autoClose: false,
+      position: ToastivePosition.BottomRight
+    }) as unknown as HTMLElement
+
+    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {})
+    const icon = host.shadowRoot?.querySelector('#toastive__close svg')
+    expect(icon).toBeTruthy()
+    if (!icon) return
+
+    pointerDown(icon)
+
+    expect(capture).not.toHaveBeenCalled()
+  })
+
+  it('still starts a drag when the press starts on the toast body', () => {
+    const host = makeToast({
+      title: 'Draggable',
+      message: 'Swipe me',
+      closeButton: true,
+      draggable: true,
+      autoClose: false,
+      position: ToastivePosition.BottomRight
+    }) as unknown as HTMLElement
+
+    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {})
+
+    pointerDown(host)
+
+    expect(capture).toHaveBeenCalledWith(1)
   })
 })
